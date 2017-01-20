@@ -16,8 +16,8 @@ gulp.task('browserSync', function() {
 
 var paths = {
     source: './source',
-    sourceCSS: './source/styles/**.less',
-    destCSS:  './source/styles'
+    sourceCSS: './source/styles/*.less',
+    destCSS:  './source/styles/dest'
 };
 
 gulp.task('css', function () {

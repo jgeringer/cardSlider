@@ -1,0 +1,56 @@
+:root {
+  font-size: 1em;
+}
+* {
+  box-sizing: border-box;
+}
+ul {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+}
+body {
+  margin: 0;
+  background: #e1e1e1;
+}
+h1 {
+  font-size: 1.4rem;
+}
+h2 {
+  font-size: 1.3rem;
+}
+h3 {
+  font-size: 1.2rem;
+}
+h4 {
+  font-size: 1.1rem;
+}
+h5 {
+  font-size: 1.0rem;
+}
+.u-textCenter {
+  text-align: center!important;
+}
+.CardListingWrapper {
+  overflow: hidden;
+}
+.CardListing {
+  background: #aaa;
+  padding: 2em;
+  height: 100vh;
+}
+.Card {
+  background: #ccc;
+  height: 80vh;
+  width: 70vw;
+  position: relative;
+  float: left;
+}
+.Card--footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(100, 100, 100, 0.5);
+  padding: 1rem;
+}
