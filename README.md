@@ -19,3 +19,10 @@
     <p class="tile__title">Text</p>
 </div>
 ```
+
+##Fonts
+[Overpass](https://fonts.google.com/specimen/Overpass?selection.family=Overpass:200,300,400,800)
+200 | 300 | 400 | 800
+
+##Local
+192.168.0.25/cardSlider/source/

@@ -12,15 +12,17 @@ ul {
 body {
   margin: 0;
   background: #e1e1e1;
+  font-family: 'Overpass', sans-serif;
 }
 h1 {
   font-size: 1.4rem;
 }
 h2 {
   font-size: 1.3rem;
+  font-weight: 400;
 }
 h3 {
-  font-size: 1.2rem;
+  font-size: 1.25rem;
 }
 h4 {
   font-size: 1.1rem;
@@ -31,20 +33,55 @@ h5 {
 .u-textCenter {
   text-align: center!important;
 }
+.u-bgPos--centerCenter {
+  background-position: 50% 50%;
+}
 .CardListingWrapper {
   overflow: hidden;
 }
 .CardListing {
-  background: #aaa;
-  padding: 2em;
+  padding-top: 10vh;
   height: 100vh;
 }
 .Card {
-  background: #ccc;
+  display: none;
+}
+.Card:first-child {
+  display: block;
+}
+.Card {
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-bottom-color: rgba(17, 17, 17, 0.5);
+  border-right-color: rgba(17, 17, 17, 0.5);
   height: 80vh;
-  width: 70vw;
+  width: 75vw;
   position: relative;
-  float: left;
+  background-size: cover;
+  transition: all 500ms cubic-bezier(0.215, 0.61, 0.355, 1);
+  margin: 0 auto;
+  box-shadow: 0 0 25px rgba(75, 75, 75, 0.75);
+  text-align: center;
+}
+.Card h2 {
+  transform: translateX(-50%);
+  left: 50%;
+  position: absolute;
+  bottom: 0;
+  color: rgba(255, 255, 255, 0.6);
+  transition: all 600ms cubic-bezier(0.215, 0.61, 0.355, 1);
+  width: 100%;
+}
+.Card.is-active {
+  width: 100vw;
+  height: 37vh;
+  box-shadow: none;
+  text-align: left;
+  border: 0;
+}
+.Card.is-active h2 {
+  transform: translateX(0%);
+  left: 2rem;
+  color: #ffffff;
 }
 .Card--footer {
   position: absolute;
@@ -52,5 +89,5 @@ h5 {
   left: 0;
   width: 100%;
   background: rgba(100, 100, 100, 0.5);
-  padding: 1rem;
+  height: 62px;
 }
