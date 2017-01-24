@@ -1,3 +1,16 @@
+import { sayHello } from "./myquery";
+
+console.log(sayHello("TypeScript!"));
+
+function showHello(divName: string, name: string){
+    const elt = document.getElementById(divName);
+    elt.innerText = sayHello(name);
+}
+
+showHello("greeting", "TypeScript LAND!");
+
+
+
 
 
 var card = document.querySelector('.Card');
@@ -20,5 +33,4 @@ card.addEventListener('click', function(){
         }
         el.className = classes.join(' ');
     }
-
 });

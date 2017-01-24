@@ -26,3 +26,6 @@
 
 ##Local
 192.168.0.25/cardSlider/source/
+
+##JS
+[TypeScript Gulp Build System](https://www.typescriptlang.org/docs/handbook/gulp.html)

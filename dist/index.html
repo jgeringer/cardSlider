@@ -2,20 +2,20 @@
     <head>
         <title>Card Slider</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scale=no" />
-        <link href="styles/normalize.css" rel="stylesheet" />
-        <link href="styles/base.css" rel="stylesheet" />
-        <link href="styles/dest/main.css" rel="stylesheet" />
+        <link href="styles/main.css" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css?family=Overpass:200,300,400,800" rel="stylesheet">
     </head>
     <body>
+
+        <p id="greeting">Loading...</p>
 
         <section class="CardListingWrapper">
 
             <nav class="CardListing">
 
-                <div class="Card u-bgPos--centerCenter" style="background-image:url('img/frig-hero-bg.jpg')">
+                <div class="Card u-bgPos--centerCenter" style=""><!--background-image:url('img/frig-hero-bg.jpg')-->
                     <div class="Card--footer">
-                        <h2>Fridaire Consumer Website</h2>
+                        <h2>test</h2><!--Fridaire Consumer Website-->
                     </div>
                 </div>
 
@@ -35,7 +35,12 @@
 
         </section>
 
-        <script src="js/main.js"></script>
+
+        
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script>(window.jQuery)||document.write('<script src="/js/vendor/jquery.min.js"><\/script>');</script>
+
+        <script src="js/bundle.js"></script>
 
     </body>
 </html>
