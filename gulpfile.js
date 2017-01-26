@@ -7,20 +7,30 @@ var sourcemaps = require('gulp-sourcemaps');
 var buffer = require('vinyl-buffer');
 var less = require('gulp-less');
 var browserSync = require('browser-sync').create();
+var imagemin = require('gulp-imagemin');
 
 var paths = {
-    pages: ['src/*.html'],
-    source: './src',
-    sourceCSS: './src/styles/main.less',
-    sourceLESS: './src/styles/**/*.less',
-    dest: './dist',
-    destCSS:  './dist/styles/'
+        pages: ['src/*.html'],
+        images: ['src/img/*'],
+        source: './src',
+        sourceCSS: './src/styles/main.less',
+        sourceLESS: './src/styles/**/*.less',
+        dest: './dist',
+        destCSS:  './dist/styles/'
 };
 
 //task: "copy-html" copy html to destination
 gulp.task("copy-html", function () {
     return gulp.src(paths.pages)
+        .pipe(browserSync.reload({ stream: true }))
         .pipe(gulp.dest("dist"));
+});
+
+// Imagemin images and ouput them in dist
+gulp.task('imagemin', function() {
+    gulp.src(paths.images)
+    .pipe(imagemin())
+    .pipe(gulp.dest(paths.dest + '/img'));
 });
 
 //task: "gulp" copy html, and update css to destination
@@ -65,6 +75,7 @@ gulp.task('css', function () {
 
 //cmd: "gulp watch" output css live without reloading
 gulp.task('watch', ['browserSync'], function(){
+  gulp.watch(paths.pages, ['copy-html']);
   gulp.watch(paths.sourceLESS, ['css']);
 });
 
