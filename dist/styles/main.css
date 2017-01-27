@@ -403,28 +403,34 @@ textarea {
 }
 .CardListingWrapper {
   overflow: hidden;
+  position: relative;
+  z-index: 5;
 }
-.CardListing {
+.CardListingWrapper .CardListing {
   padding-top: 10vh;
   height: 100vh;
   transition: padding-top var(--transitionBase);
 }
-.CardListing.is-active {
+.CardListingWrapper.is-active .CardListing {
   padding-top: 0;
 }
 article {
-  display: none;
-  top: 0px;
+  visibility: hidden;
+  top: 17vh;
   left: 0;
   position: absolute;
   width: 100%;
   background: #fff;
-  transition: all var(--transitionBase);
-  z-index: 5;
+  opacity: 0;
+  transform: scale(0.5);
+  padding: 1rem;
+  transition: all 500ms var(--transitionBase), opacity 200ms var(--transitionBase);
 }
-.Card.is-active article {
-  display: block;
-  top: 222px;
+.CardListingWrapper.is-active ~ article {
+  visibility: visible;
+  top: 37vh;
+  opacity: 1;
+  transform: scale(1);
 }
 .Card {
   display: none;
@@ -436,6 +442,7 @@ article {
   border: 1px solid rgba(255, 255, 255, 0.5);
   border-bottom-color: rgba(17, 17, 17, 0.5);
   border-right-color: rgba(17, 17, 17, 0.5);
+  background-color: #ccc;
   height: 80vh;
   width: 75vw;
   position: relative;

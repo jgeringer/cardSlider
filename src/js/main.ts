@@ -16,13 +16,13 @@
 
 
 var card = document.querySelector('.Card'),
-    cardListing = document.querySelector('.CardListing');
+    cardListingWrapper = document.querySelector('.CardListingWrapper');
 
 card.addEventListener('click', function(){
     console.log('clicked');
     var $el = $(this);
 
-    $(cardListing).toggleClass('is-active');
+    $(cardListingWrapper).toggleClass('is-active');
     $el.toggleClass('is-active');
 
     //toggling (especially for ie9+)
