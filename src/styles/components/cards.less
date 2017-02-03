@@ -1,6 +1,19 @@
 :root{
     --transitionBase:cubic-bezier(0.215, 0.610, 0.355, 1);
+    
+    //default times
+    --timeXShort: 100ms;
+    --timeShort: 200ms;
+    --timeMedium: 300ms;
+    --timeLong: 400ms;
+    --timeXLong: 500ms;
 
+    //triple times (for testing only)
+    // --timeXShort: 300ms;
+    // --timeShort: 600ms;
+    // --timeMedium: 900ms;
+    // --timeLong: 1200ms;
+    // --timeXLong: 1500ms;
 }
 
 .CardListingWrapper{
@@ -10,26 +23,37 @@
     .CardListing{
         padding-top:10vh;
         height: 100vh;
-        transition: padding-top var(--transitionBase);
+        transition: padding-top var(--transitionBase) var(--timeMedium); 
     }
     &.is-active{
+        //height: 37vh;
+        animation: cardListingWrapper 300ms var(--timeShort) forwards;
         .CardListing{
             padding-top:0;
         }
     }
 } 
 
+@keyframes cardListingWrapper{
+    from {
+        height: 100vh;
+    }
+    to {
+        height: 37vh
+    }
+}
+
 article{
     visibility: hidden;
+    opacity: 0;
     top:17vh;
     left:0;
     position: absolute;
     width:100%;
     background: #fff;
-    opacity: 0;
     transform: scale(.5);
     padding: 1rem;
-    transition: all 500ms var(--transitionBase), opacity 200ms var(--transitionBase);
+    transition: all var(--timeXLong) var(--transitionBase), opacity var(--timeXLong) var(--transitionBase);
     .CardListingWrapper.is-active ~&{
         visibility: visible;
         top:37vh;
@@ -52,7 +76,7 @@ article{
     width: 75vw;
     position: relative;
     background-size: cover;
-    transition: all 500ms var(--transitionBase); //cubic-bezier(0.19, 1, 0.22, 1);
+    transition: all var(--timeXLong) var(--transitionBase); //cubic-bezier(0.19, 1, 0.22, 1);
     margin: 0 auto;
     box-shadow: 0 0 25px rgba(75,75,75,.75);
     text-align: center;

@@ -10,13 +10,23 @@
 // }
 //showHello("greeting", "TypeScript LAND!");
 var card = document.querySelector('.Card'),
-    cardListingWrapper = document.querySelector('.CardListingWrapper');
+    cardListingWrapper = document.querySelector('.CardListingWrapper'),
+    cardDetail = document.getElementById('Card-detail');
 card.addEventListener('click', function () {
     console.log('clicked');
     var $el = $(this);
     $(cardListingWrapper).toggleClass('is-active');
     $el.toggleClass('is-active');
-    //toggling (especially for ie9+)
+    //if is-active, then inject it's html to the page...
+    if ($el.is('.is-active')) {
+        var data = '<p>Lipsum text</p><p>Lipsum text</p><p>Lipsum text</p><p>Lipsum text</p><p>Lipsum text</p><p>Lipsum text</p><p>Lipsum text</p><p>Lipsum text</p><p>Lipsum text</p><p>Lipsum text</p><p>Lipsum text</p><p>Lipsum text</p><p>Lipsum text</p><p>Lipsum text</p><p>Lipsum text</p><p>Lipsum text</p><p>Lipsum text</p><p>Lipsum text</p><p>Lipsum text</p><p>Lipsum text</p><p>Lipsum text</p><p>Lipsum text</p><p>Lipsum text</p><p>Lipsum text</p>';
+        cardDetail.insertAdjacentHTML('beforeend', data);
+    } else {
+        setTimeout(function () {
+            console.log('html cleared');
+            cardDetail.innerHTML = '';
+        }, 500);
+    }
 });
 
 },{}]},{},[1])

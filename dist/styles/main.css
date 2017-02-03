@@ -400,6 +400,11 @@ textarea {
 }
 :root {
   --transitionBase: cubic-bezier(0.215, 0.61, 0.355, 1);
+  --timeXShort: 100ms;
+  --timeShort: 200ms;
+  --timeMedium: 300ms;
+  --timeLong: 400ms;
+  --timeXLong: 500ms;
 }
 .CardListingWrapper {
   overflow: hidden;
@@ -409,22 +414,33 @@ textarea {
 .CardListingWrapper .CardListing {
   padding-top: 10vh;
   height: 100vh;
-  transition: padding-top var(--transitionBase);
+  transition: padding-top var(--transitionBase) var(--timeMedium);
+}
+.CardListingWrapper.is-active {
+  animation: cardListingWrapper 300ms var(--timeShort) forwards;
 }
 .CardListingWrapper.is-active .CardListing {
   padding-top: 0;
 }
+@keyframes cardListingWrapper {
+  from {
+    height: 100vh;
+  }
+  to {
+    height: 37vh;
+  }
+}
 article {
   visibility: hidden;
+  opacity: 0;
   top: 17vh;
   left: 0;
   position: absolute;
   width: 100%;
   background: #fff;
-  opacity: 0;
   transform: scale(0.5);
   padding: 1rem;
-  transition: all 500ms var(--transitionBase), opacity 200ms var(--transitionBase);
+  transition: all var(--timeXLong) var(--transitionBase), opacity var(--timeXLong) var(--transitionBase);
 }
 .CardListingWrapper.is-active ~ article {
   visibility: visible;
@@ -447,7 +463,7 @@ article {
   width: 75vw;
   position: relative;
   background-size: cover;
-  transition: all 500ms var(--transitionBase);
+  transition: all var(--timeXLong) var(--transitionBase);
   margin: 0 auto;
   box-shadow: 0 0 25px rgba(75, 75, 75, 0.75);
   text-align: center;
