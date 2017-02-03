@@ -12,27 +12,43 @@
 //showHello("greeting", "TypeScript LAND!");
 
 
+console.log("hello from main");
 
 
-
-var card = document.querySelector('.Card'),
+let card = $('.Card'),
     cardListingWrapper = document.querySelector('.CardListingWrapper'),
     cardDetail =  document.getElementById('Card-detail');
 
-card.addEventListener('click', function(){
-    console.log('clicked');
-    var $el = $(this);
+let dogs = [
+  { name: 'Snickers', age: 2 },
+  { name: 'Hardy', age: 6 },
+  { name: 'Chloe', age: 8 }
+];
+
+let html = `
+  <ol>
+    ${dogs.map(dog => `
+      <li>
+        ${dog.name} is ${dog.age * 7} dog years old.
+      </li>
+    `).join('')}
+  </ol>
+`;
+
+card.on('click', function(){
+    console.log('clicked card!!');
+    let $el = $(this);
 
     $(cardListingWrapper).toggleClass('is-active');
     $el.toggleClass('is-active');
 
     //if is-active, then inject it's html to the page...
     if($el.is('.is-active')){
-        var data = '<p>Lipsum text</p><p>Lipsum text</p><p>Lipsum text</p><p>Lipsum text</p><p>Lipsum text</p><p>Lipsum text</p><p>Lipsum text</p><p>Lipsum text</p><p>Lipsum text</p><p>Lipsum text</p><p>Lipsum text</p><p>Lipsum text</p><p>Lipsum text</p><p>Lipsum text</p><p>Lipsum text</p><p>Lipsum text</p><p>Lipsum text</p><p>Lipsum text</p><p>Lipsum text</p><p>Lipsum text</p><p>Lipsum text</p><p>Lipsum text</p><p>Lipsum text</p><p>Lipsum text</p>';
+        let data = html;
         cardDetail.insertAdjacentHTML('beforeend', data);
     } else {
         setTimeout(function(){
-            console.log('html cleared');
+            //console.log('html cleared');
             cardDetail.innerHTML = '';
         }, 500);
     }

@@ -3,7 +3,7 @@
 // }
 
 
-
+console.log('inside my query');
 
 
 // if (el.classList) {

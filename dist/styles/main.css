@@ -448,11 +448,11 @@ article {
   opacity: 1;
   transform: scale(1);
 }
-.Card {
-  display: none;
+.CardListingWrapper .CardListing {
+  width: 1000%;
 }
-.Card:first-child {
-  display: block;
+.Card {
+  float: left;
 }
 .Card {
   border: 1px solid rgba(255, 255, 255, 0.5);

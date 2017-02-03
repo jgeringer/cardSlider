@@ -29,3 +29,6 @@
 
 ##JS
 [TypeScript Gulp Build System](https://www.typescriptlang.org/docs/handbook/gulp.html)
+
+##To Do:
+* Add carousel functionality
