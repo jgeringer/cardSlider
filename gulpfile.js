@@ -35,6 +35,7 @@ gulp.task('imagemin', function() {
 
 //task: "gulp" copy html, and update css to destination
 gulp.task("default", ["copy-html", "css"], function () {
+    
     return browserify({
         basedir: '.',
         debug: true,
