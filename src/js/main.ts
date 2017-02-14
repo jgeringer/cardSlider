@@ -17,12 +17,12 @@ console.log("hello from main");
 
 let card = $('.Card'),
     cardListingWrapper = document.querySelector('.CardListingWrapper'),
-    cardDetail =  document.getElementById('Card-detail');
+    cardDetail =  document.getElementById('Card-detail'); 
 
 let dogs = [
   { name: 'Snickers', age: 2 },
   { name: 'Hardy', age: 6 },
-  { name: 'Chloe', age: 8 }
+  { name: 'Chloe', age: 8 } 
 ];
 
 let html = `
@@ -35,8 +35,11 @@ let html = `
   </ol>
 `;
 
+
+
 card.on('click', function(){
     console.log('clicked card!!');
+    
     let $el = $(this);
 
     $(cardListingWrapper).toggleClass('is-active');

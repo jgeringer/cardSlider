@@ -42,7 +42,8 @@ gulp.task("js", function(){
     return browserify({
         basedir: '.',
         debug: true,
-        entries: ['src/js/main.ts', 'src/js/myquery.ts'],
+        //entries: ['src/js/main.ts', 'src/js/vendor/hammer.min.js', 'src/js/slider.js'],
+        entries: ['src/js/vendor/hammer.min.js', 'src/js/main.js', 'src/js/slider.js'],
         cache: {},
         packageCache: {}
     })
@@ -81,7 +82,8 @@ gulp.task('css', function () {
 gulp.task('watch', ['browserSync'], function(){
   gulp.watch(paths.pages, ['copy-html']);
   gulp.watch(paths.sourceLESS, ['css']);
-  gulp.watch('src/js/*.ts', ['js']);
+  //gulp.watch('src/js/*.ts', ['js']);
+  gulp.watch('src/js/*.js', ['js']);
 });
 
 

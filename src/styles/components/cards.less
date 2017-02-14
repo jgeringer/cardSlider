@@ -30,6 +30,12 @@
         animation: cardListingWrapper 300ms var(--timeShort) forwards;
         .CardListing{
             padding-top:0;
+            width: 500%;    //NEED TO CALCULATE FROM JS
+            margin:0;
+        }
+        .Card{
+            width:100%;
+            margin: 0;
         }
     }
 } 
@@ -63,11 +69,13 @@ article{
 }
 
 
-// .Card{display: none;}
-// .Card:first-child{display: block;}
-
 .CardListingWrapper .CardListing{
-    width: 1000%;
+    width: 400%;    //NEED TO CALCULATE FROM JS
+    display: flex;
+    margin-left: 10%;
+    &.is-animating{
+        transition: transform 400ms cubic-bezier( 0.5, 0, 0.5, 1 )
+    }
 }
 .Card{
     float: left;
@@ -79,11 +87,11 @@ article{
     border-right-color: rgba(17,17,17,.5);
     background-color: #ccc;
     height: 80vh;
-    width: 75vw;
+    width: 80%;
     position: relative;
     background-size: cover;
     transition: all var(--timeXLong) var(--transitionBase); //cubic-bezier(0.19, 1, 0.22, 1);
-    margin: 0 auto;
+    margin: 0 1%;
     box-shadow: 0 0 25px rgba(75,75,75,.75);
     text-align: center;
     h2{
@@ -97,11 +105,12 @@ article{
     }
 
     &.is-active{
-        width: 100vw;
+        width: 100%;
         height: 37vh;
         box-shadow: none;
         text-align: left;
         border:0;
+        margin:0 auto;
         h2{
             transform: translateX(0%);
             left: 2rem;
