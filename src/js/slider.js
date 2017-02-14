@@ -30,7 +30,7 @@ slider.init = function( selector ) {
   
   // 4d. Set up HammerJS
   var sliderManager = new Hammer.Manager( slider.sliderEl );
-  sliderManager.add( new Hammer.Pan({ threshold: 0, pointers: 0 }) );
+  sliderManager.add( new Hammer.Pan({ threshold: 20, pointers: 0, direction: Hammer.DIRECTION_HORIZONTAL }) ); //direction: Hammer.DIRECTION_RIGHT
 
 
   sliderManager.on( 'pan', function( e ) {    

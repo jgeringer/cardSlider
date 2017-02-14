@@ -16,7 +16,9 @@ let html = `
   <ol>
     ${dogs.map(dog => `
       <li>
-        ${dog.name} is ${dog.age * 7} dog years old.
+        ${dog.name} is ${dog.age * 7} dog years old. ${dog.name} is ${dog.age * 7} dog years old. ${dog.name} is ${dog.age * 7} dog years old.
+        ${dog.name} is ${dog.age * 7} dog years old. ${dog.name} is ${dog.age * 7} dog years old. ${dog.name} is ${dog.age * 7} dog years old.
+        ${dog.name} is ${dog.age * 7} dog years old. ${dog.name} is ${dog.age * 7} dog years old. ${dog.name} is ${dog.age * 7} dog years old.
       </li>
     `).join('')}
   </ol>
@@ -51,27 +53,103 @@ let html = `
 
 
 //Tapping begin!
-$('.Card').hammer().bind("tap", function(){
+$('.Card').hammer().off("tap.cardOpen").on("tap.cardOpen", function(e){
     console.log('hammer time');
+    e.preventDefault();e.stopPropagation();
+
+    //need to clone the active card, assign it an fixed position with the top of where it is.
 
     let $el = $(this);
 
-    cardListingWrapper.classList.toggle('is-active');
+    // if (cardListingWrapper.classList.contains('is-active')){
+    //     $('.CardListingWrapper--offset').height(0);
+    //     $('.CardListingWrapper').css({
+    //         top: 0
+    //     });
+    // } else {
+    //     $('.CardListingWrapper--offset').height(cardListingWrapper.offsetHeight);
+    //     $('.CardListingWrapper').css({
+    //         top: $('.CardListingWrapper').position().top
+    //     }).addClass('is-animating');
+    // }
 
-    $el.toggleClass('is-active');
+    $el.siblings().removeClass('is-selected');
+    $el.addClass('is-selected');
 
-    //if is-active, then inject it's html to the page...
-    if($el.is('.is-active')){
-        let data = html;
-        cardDetail.insertAdjacentHTML('beforeend', data);
-    } else {
+    let $elX = $el.offset().left,
+        $elY = $el.offset().top - $(window).scrollTop();
+
+
+    cardListingWrapper.classList.toggle('is-hiding');
+
+    var $elClone = $el.clone().appendTo('body');
+
+    $elClone.css({
+        top: $elY,
+        left: $elX
+    });
+
+    $elClone.addClass('is-fixed');
+
+    setTimeout(function(){
+        $elClone.addClass('is-top');
+    }, 20);
+
+
+
+
+    
+    $elClone.hammer().off('tap.closeClone').on('tap.closeClone', function(e){
+    //$elClone.off('click.closeClone').on('click.closeClone', function(e){
+        e.preventDefault();
+        
+
+        //first giv it a position fixed, with the top position of exactly where it is in the viewport
+
+        $elClone.removeClass('is-top');
+
+        //$elClone.removeClass('is-fixed');
+        
+        // setTimeout(function(){
+        //     $elClone.removeClass('is-top');
+        // }, 20);
+
+        $elClone.css({
+            top: $('.Card.is-selected').offset().top- $(window).scrollTop(),
+            left: $('.Card.is-selected').offset().left
+        });
+
+        console.log('yoo yoo!!!!!');
+        
+        
+        //$elClone.addClass('is-going-back');
+
+        cardListingWrapper.classList.toggle('is-hiding');
+
         setTimeout(function(){
-            //console.log('html cleared');
-            cardDetail.innerHTML = '';
+            $elClone.remove();
         }, 500);
-    }
+    });
 
-})
+
+
+    // //original...
+    // cardListingWrapper.classList.toggle('is-active');
+
+    // $el.toggleClass('is-active');
+
+    // //if is-active, then inject it's html to the page...
+    // if($el.is('.is-active')){
+    //     let data = html;
+    //     cardDetail.insertAdjacentHTML('beforeend', data);
+    // } else {
+    //     setTimeout(function(){
+    //         //console.log('html cleared');
+    //         cardDetail.innerHTML = '';
+    //     }, 500);
+    // }
+
+});
 
 // var myElement = document.querySelectorAll('.Card');
 // var mc = new Hammer(myElement);
@@ -200,7 +278,7 @@ slider.init = function( selector ) {
   
   // 4d. Set up HammerJS
   var sliderManager = new Hammer.Manager( slider.sliderEl );
-  sliderManager.add( new Hammer.Pan({ threshold: 0, pointers: 0 }) );
+  sliderManager.add( new Hammer.Pan({ threshold: 20, pointers: 0, direction: Hammer.DIRECTION_HORIZONTAL }) ); //direction: Hammer.DIRECTION_RIGHT
 
 
   sliderManager.on( 'pan', function( e ) {    

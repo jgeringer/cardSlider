@@ -1,5 +1,6 @@
 :root{
     --transitionBase:cubic-bezier(0.215, 0.610, 0.355, 1);
+    //--transitionBase: ease;
     
     //default times
     --timeXShort: 100ms;
@@ -18,16 +19,35 @@
 
 .CardListingWrapper{
     overflow: hidden;
-    position: relative;
     z-index: 5;
+
+    position: relative;
+    
+    transition: top var(--timeMedium) var(--transitionBase),
+                opacity 333ms ease; 
+    
+    opacity: 1;
+
     .CardListing{
-        padding-top:10vh;
-        height: 100vh;
-        transition: padding-top var(--transitionBase) var(--timeMedium); 
+        padding-top:5vh;
+        height: 70vh;
+        transition: padding-top var(--timeMedium) var(--transitionBase); 
+        //transition: all 3000 var(--transitionBase); 
     }
+    
+
+    &.is-hiding{
+        opacity: 0;
+    }
+
     &.is-active{
         //height: 37vh;
         animation: cardListingWrapper 300ms var(--timeShort) forwards;
+        
+        position: fixed;
+        top: 0;
+        width:100%;
+        
         .CardListing{
             padding-top:0;
             width: 500%;    //NEED TO CALCULATE FROM JS
@@ -42,10 +62,19 @@
 
 @keyframes cardListingWrapper{
     from {
-        height: 100vh;
+        height: 70vh;
     }
     to {
         height: 37vh
+    }
+}
+
+@keyframes fadeOut{
+    from {
+        opacity:1;
+    }
+    to {
+        opacity:0;
     }
 }
 
@@ -62,7 +91,7 @@ article{
     transition: all var(--timeXLong) var(--transitionBase), opacity var(--timeXLong) var(--transitionBase);
     .CardListingWrapper.is-active ~&{
         visibility: visible;
-        top:37vh;
+        top: 37vh;
         opacity: 1;
         transform: scale(1);
     }
@@ -70,11 +99,11 @@ article{
 
 
 .CardListingWrapper .CardListing{
-    width: 400%;    //NEED TO CALCULATE FROM JS
+    width: 350%;    //NEED TO CALCULATE FROM JS
     display: flex;
-    margin-left: 10%;
+    margin-left: 15%;
     &.is-animating{
-        transition: transform 400ms cubic-bezier( 0.5, 0, 0.5, 1 )
+        transition: transform 200ms cubic-bezier( 0.5, 0, 0.5, 1 )
     }
 }
 .Card{
@@ -83,16 +112,19 @@ article{
 
 .Card{
     border:1px solid rgba(255,255,255,.5);
-    border-bottom-color: rgba(17,17,17,.5);
-    border-right-color: rgba(17,17,17,.5);
+    border-bottom-color: rgba(100,100,100,.75);
+    border-right-color: rgba(100,100,100,.75);
     background-color: #ccc;
-    height: 80vh;
-    width: 80%;
+    height: 60vh;
+    width: 70%;
     position: relative;
     background-size: cover;
-    transition: all var(--timeXLong) var(--transitionBase); //cubic-bezier(0.19, 1, 0.22, 1);
+    transition: height var(--timeXLong) var(--transitionBase),
+                top 333ms ease,
+                left 333ms ease,
+                width 333ms ease;
     margin: 0 1%;
-    box-shadow: 0 0 25px rgba(75,75,75,.75);
+    box-shadow: 0 0 15px rgba(75,75,75,.25);
     text-align: center;
     h2{
         transform: translateX(-50%);
@@ -100,8 +132,33 @@ article{
         position: absolute;
         bottom: 0;
         color: rgba(255,255,255,.6);
-        transition: all 600ms var(--transitionBase);
+        //transition: all 600ms var(--transitionBase);
         width:100%;
+    }
+
+    &.is-fixed{
+        //animation: cardListingWrapper 300ms var(--timeShort) forwards;
+        
+        position: fixed;
+        width:63%;
+        z-index: 10;
+        margin: 0;
+        
+    }
+    &.is-top{
+        top:0!important; 
+        position: fixed;
+        left:0!important;
+        width:100%;
+        margin:0;
+        border:0;
+    }
+
+    &.is-going-back{
+        // position: absolute;
+        // width:63%;
+        // margin: 0;
+        animation: fadeOut 300ms forwards;
     }
 
     &.is-active{

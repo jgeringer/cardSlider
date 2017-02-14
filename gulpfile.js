@@ -8,6 +8,8 @@ var buffer = require('vinyl-buffer');
 var less = require('gulp-less');
 var browserSync = require('browser-sync').create();
 var imagemin = require('gulp-imagemin');
+var postcss = require('gulp-postcss');
+var cssnext = require('postcss-cssnext');
 
 var paths = {
         pages: ['src/*.html'],
@@ -16,7 +18,10 @@ var paths = {
         sourceCSS: './src/styles/main.less',
         sourceLESS: './src/styles/**/*.less',
         dest: './dist',
-        destCSS:  './dist/styles/'
+        destCSS:  './dist/styles/',
+        postCSSPlugins: [
+            cssnext({ browsers: ['last 3 versions'] })
+        ]
 };
 
 //task: "copy-html" copy html to destination
@@ -73,6 +78,7 @@ gulp.task('css', function () {
   return gulp.src(paths.sourceCSS)
     .pipe(sourcemaps.init())
     .pipe(less())
+    .pipe(postcss(paths.postCSSPlugins))
     .pipe(sourcemaps.write('.'))
     .pipe(browserSync.reload({ stream: true }))
     .pipe(gulp.dest(paths.destCSS));
