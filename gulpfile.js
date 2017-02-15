@@ -48,7 +48,7 @@ gulp.task("js", function(){
         basedir: '.',
         debug: true,
         //entries: ['src/js/main.ts', 'src/js/vendor/hammer.min.js', 'src/js/slider.js'],
-        entries: ['src/js/vendor/hammer.min.js', 'src/js/main.js', 'src/js/slider.js'],
+        entries: ['src/js/vendor/hammer.min.js', 'src/js/vendor/hammer.jquery.js', 'src/js/main.js', 'src/js/slider.js'],
         cache: {},
         packageCache: {}
     })

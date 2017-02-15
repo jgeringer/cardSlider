@@ -8,6 +8,7 @@
     --timeMedium: 300ms;
     --timeLong: 400ms;
     --timeXLong: 500ms;
+    --timeXLLong: 800ms;
 
     //triple times (for testing only)
     // --timeXShort: 300ms;
@@ -15,49 +16,68 @@
     // --timeMedium: 900ms;
     // --timeLong: 1200ms;
     // --timeXLong: 1500ms;
+
+    --cardWidth: 70%;
 }
+
 
 .CardListingWrapper{
     overflow: hidden;
     z-index: 5;
-
     position: relative;
     
-    transition: top var(--timeMedium) var(--transitionBase),
-                opacity 333ms ease; 
+    transition: top var(--timeXLLong) var(--transitionBase),
+                opacity var(--timeXLLong) ease,
+                visibility var(--timeXLLong) ease;
     
     opacity: 1;
+    visibility: visible;
+    // transform: translateZ(0);
+    // will-change: transform;
+
+    &.is-hiding{
+        opacity: 0;
+        visibility: hidden;
+    }
 
     .CardListing{
-        padding-top:5vh;
         height: 70vh;
-        transition: padding-top var(--timeMedium) var(--transitionBase); 
+        max-height: 400px;
+        margin-top: 1em;
+        margin-bottom: 1em;
+
+        //width: 350%;    //NEED TO CALCULATE FROM JS (count num of items (.CardListing > .Card)
+        display: flex;
+        margin-left: 2%; //15%;
+        &.is-animating{
+            transition: transform 200ms cubic-bezier( 0.5, 0, 0.5, 1 )
+        }
+
+        //transition: padding-top var(--timeMedium) var(--transitionBase); 
         //transition: all 3000 var(--transitionBase); 
     }
     
 
-    &.is-hiding{
-        opacity: 0;
-    }
+    
 
-    &.is-active{
-        //height: 37vh;
-        animation: cardListingWrapper 300ms var(--timeShort) forwards;
+    // &.is-active{
+    //     //height: 37vh;
+    //     animation: cardListingWrapper 300ms var(--timeShort) forwards;
         
-        position: fixed;
-        top: 0;
-        width:100%;
+    //     position: fixed;
+    //     top: 0;
+    //     width:100%;
         
-        .CardListing{
-            padding-top:0;
-            width: 500%;    //NEED TO CALCULATE FROM JS
-            margin:0;
-        }
-        .Card{
-            width:100%;
-            margin: 0;
-        }
-    }
+    //     .CardListing{
+    //         padding-top:0;
+    //         width: 500%;    //NEED TO CALCULATE FROM JS
+    //         margin:0;
+    //     }
+    //     .Card{
+    //         width:100%;
+    //         margin: 0;
+    //     }
+    // }
 } 
 
 @keyframes cardListingWrapper{
@@ -78,54 +98,63 @@
     }
 }
 
-article{
+#Card-detail{
     visibility: hidden;
     opacity: 0;
-    top:17vh;
-    left:0;
+    top:27vh;
+    //max-height: 1px;
+    left:3%;
     position: absolute;
     width:100%;
     background: #fff;
-    transform: scale(.5);
+    transform: scale(.7);
     padding: 1rem;
-    transition: all var(--timeXLong) var(--transitionBase), opacity var(--timeXLong) var(--transitionBase);
-    .CardListingWrapper.is-active ~&{
+    transition: all 333ms ease;
+    transform-origin: left top;
+    overflow: hidden;
+
+    transform: translateZ(0);
+    will-change: transform;
+
+    &.is-active{
         visibility: visible;
         top: 37vh;
+        //max-height: 1000px;
+        left:0;
         opacity: 1;
         transform: scale(1);
     }
 }
 
 
-.CardListingWrapper .CardListing{
-    width: 350%;    //NEED TO CALCULATE FROM JS
-    display: flex;
-    margin-left: 15%;
-    &.is-animating{
-        transition: transform 200ms cubic-bezier( 0.5, 0, 0.5, 1 )
-    }
-}
-.Card{
-    float: left;
-}
 
 .Card{
-    border:1px solid rgba(255,255,255,.5);
-    border-bottom-color: rgba(100,100,100,.75);
-    border-right-color: rgba(100,100,100,.75);
+    // border:1px solid rgba(255,255,255,.5);
+    // border-bottom-color: rgba(100,100,100,.75);
+    // border-right-color: rgba(100,100,100,.75);
+    border: solid 4px #efefef;
+    border-radius: 8px;
+
+    //box-shadow: 0 0 15px rgba(75,75,75,1);
+    box-shadow: 0 0 5px #b5b5b5;
+
     background-color: #ccc;
     height: 60vh;
-    width: 70%;
+    max-height: 400px;
+    width: var(--cardWidth);
     position: relative;
     background-size: cover;
     transition: height var(--timeXLong) var(--transitionBase),
                 top 333ms ease,
                 left 333ms ease,
                 width 333ms ease;
-    margin: 0 1%;
-    box-shadow: 0 0 15px rgba(75,75,75,.25);
+    margin: 0 1%;    
     text-align: center;
+    float: left;
+
+    //  transform: translateZ(0);
+    //  will-change: transform;
+
     h2{
         transform: translateX(-50%);
         left: 50%;
@@ -140,18 +169,27 @@ article{
         //animation: cardListingWrapper 300ms var(--timeShort) forwards;
         
         position: fixed;
-        width:63%;
+        width: 65.8%; //63%;
         z-index: 10;
         margin: 0;
-        
+        box-shadow: 0 0 0 0;
     }
     &.is-top{
-        top:0!important; 
         position: fixed;
+
+        top:0!important; 
         left:0!important;
+        // top: 0;
+        // left: 0;
+        //transform: translate(0,0)!important;
+        
         width:100%;
+        height: 37vh;
         margin:0;
         border:0;
+        &.is-now-abs{
+            position: absolute;
+        }
     }
 
     &.is-going-back{
@@ -184,3 +222,11 @@ article{
     }
 }
 
+.Button{
+    &--close{
+        position: fixed;
+        top:0;
+        right:0;
+        z-index: 15;
+    }
+}

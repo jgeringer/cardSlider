@@ -1,10 +1,14 @@
-console.log("hello from es2015 main");
+//global vars
+let cardListingWrapper = document.querySelector('.CardListingWrapper'),
+    cardListing = document.querySelector('.CardListing'),
+    card = document.querySelectorAll('.Card');
+
+//set the width the of the card container.
+cardListing.style.width = card.length * 70 +'%';
 
 
-let card = $('.Card'),
-    cardListingWrapper = document.querySelector('.CardListingWrapper'),
-    cardDetail =  document.getElementById('Card-detail');
 
+//sample data
 let dogs = [
   { name: 'Snickers', age: 2 },
   { name: 'Hardy', age: 6 },
@@ -18,37 +22,17 @@ let html = `
         ${dog.name} is ${dog.age * 7} dog years old. ${dog.name} is ${dog.age * 7} dog years old. ${dog.name} is ${dog.age * 7} dog years old.
         ${dog.name} is ${dog.age * 7} dog years old. ${dog.name} is ${dog.age * 7} dog years old. ${dog.name} is ${dog.age * 7} dog years old.
         ${dog.name} is ${dog.age * 7} dog years old. ${dog.name} is ${dog.age * 7} dog years old. ${dog.name} is ${dog.age * 7} dog years old.
+        ${dog.name} is ${dog.age * 7} dog years old. ${dog.name} is ${dog.age * 7} dog years old. ${dog.name} is ${dog.age * 7} dog years old.
+        ${dog.name} is ${dog.age * 7} dog years old. ${dog.name} is ${dog.age * 7} dog years old. ${dog.name} is ${dog.age * 7} dog years old.
+        ${dog.name} is ${dog.age * 7} dog years old. ${dog.name} is ${dog.age * 7} dog years old. ${dog.name} is ${dog.age * 7} dog years old.
+        ${dog.name} is ${dog.age * 7} dog years old. ${dog.name} is ${dog.age * 7} dog years old. ${dog.name} is ${dog.age * 7} dog years old.
       </li>
     `).join('')}
   </ol>
-`;
+`;    
 
 
-
-
-    function hammerify(el, options) {
-        var $el = $(el);
-        if(!$el.data("hammer")) {
-            $el.data("hammer", new Hammer($el[0], options));
-        }
-    }
-
-    $.fn.hammer = function(options) {
-        return this.each(function() {
-            hammerify(this, options);
-        });
-    };
-
-    // extend the emit method to also trigger jQuery events
-    Hammer.Manager.prototype.emit = (function(originalEmit) {
-        return function(type, data) {
-            originalEmit.call(this, type, data);
-            $(this.element).trigger({
-                type: type,
-                gesture: data
-            });
-        };
-    })(Hammer.Manager.prototype.emit);
+    
 
 
 //Tapping begin!
@@ -75,35 +59,87 @@ $('.Card').hammer().off("tap.cardOpen").on("tap.cardOpen", function(e){
     $el.siblings().removeClass('is-selected');
     $el.addClass('is-selected');
 
-    let $elX = $el.offset().left,
-        $elY = $el.offset().top - $(window).scrollTop();
-
+    let $currY = $(window).scrollTop(),
+        $elX = $el.offset().left,
+        $elY = $el.offset().top - $currY;
 
     cardListingWrapper.classList.toggle('is-hiding');
 
     var $elClone = $el.clone().appendTo('body');
+
+    $elClone.prepend('<button class="Button Button--close">close me</button>');
 
     $elClone.css({
         top: $elY,
         left: $elX
     });
 
+    // $elClone.css({
+    //     'transform': 'translateY('+$elY+'px)' + ' translateX('+ $elX +'px)'
+    // });
+
     $elClone.addClass('is-fixed');
+
+
+    let data = html,
+        cardDetailContainer = '<article id="Card-detail"></article>';
+
+    //$elClone.append(cardDetailContainer);
+
+    let cardDetail = document.getElementById('Card-detail');
+
+    cardDetail.insertAdjacentHTML('beforeend', data);
+    
+
 
     setTimeout(function(){
         $elClone.addClass('is-top');
+        setTimeout(function(){
+            $('html, body').scrollTop(0);
+            $elClone.addClass('is-now-abs');
+            cardDetail.classList.add('is-active');
+        }, 100);
     }, 20);
 
 
 
 
+        
+
+
     
-    $elClone.hammer().off('tap.closeClone').on('tap.closeClone', function(e){
+
+        //might need to shoot the user to the top of the page
+
+        //next, apply the card data to a div...
+
+
+    // //original...
+    // cardListingWrapper.classList.toggle('is-active');
+
+    // $el.toggleClass('is-active');
+
+    // //if is-active, then inject it's html to the page...
+    // if($el.is('.is-active')){
+    //     let data = html;
+    //     cardDetail.insertAdjacentHTML('beforeend', data);
+    // } else {
+    //     setTimeout(function(){
+    //         //console.log('html cleared');
+    //         cardDetail.innerHTML = '';
+    //     }, 500);
+    // }
+
+    
+    $('.Button--close').hammer().off('tap.closeClone').on('tap.closeClone', function(e){
     //$elClone.off('click.closeClone').on('click.closeClone', function(e){
         e.preventDefault();
         
+        cardDetail.classList.remove('is-active');
 
         //first giv it a position fixed, with the top position of exactly where it is in the viewport
+        $('html, body').scrollTop($currY);
+        $elClone.removeClass('is-now-abs');
 
         $elClone.removeClass('is-top');
 
@@ -125,28 +161,21 @@ $('.Card').hammer().off("tap.cardOpen").on("tap.cardOpen", function(e){
 
         cardListingWrapper.classList.toggle('is-hiding');
 
-        setTimeout(function(){
+                    
+
+        setTimeout(function(){            
             $elClone.remove();
+            $el.removeClass('is-selected');
+        
+            //console.log('html cleared');
+            cardDetail.innerHTML = '';
+        
         }, 500);
     });
 
 
 
-    // //original...
-    // cardListingWrapper.classList.toggle('is-active');
-
-    // $el.toggleClass('is-active');
-
-    // //if is-active, then inject it's html to the page...
-    // if($el.is('.is-active')){
-    //     let data = html;
-    //     cardDetail.insertAdjacentHTML('beforeend', data);
-    // } else {
-    //     setTimeout(function(){
-    //         //console.log('html cleared');
-    //         cardDetail.innerHTML = '';
-    //     }, 500);
-    // }
+    
 
 });
 
