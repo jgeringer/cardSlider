@@ -90,4 +90,4 @@ slider.goTo = function( number ) {
  }
 };
 
-slider.init('.CardListing')
+slider.init('.CardListing');

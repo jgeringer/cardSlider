@@ -1,43 +1,23 @@
-:root{
-    --transitionBase:cubic-bezier(0.215, 0.610, 0.355, 1);
-    //--transitionBase: ease;
-    
-    //default times
-    --timeXShort: 100ms;
-    --timeShort: 200ms;
-    --timeMedium: 300ms;
-    --timeLong: 400ms;
-    --timeXLong: 500ms;
-    --timeXLLong: 800ms;
-
-    //triple times (for testing only)
-    // --timeXShort: 300ms;
-    // --timeShort: 600ms;
-    // --timeMedium: 900ms;
-    // --timeLong: 1200ms;
-    // --timeXLong: 1500ms;
-
-    --cardWidth: 70%;
-}
+@import "../common/variables.less";
 
 
 .CardListingWrapper{
     overflow: hidden;
     z-index: 5;
     position: relative;
-    
-    transition: top var(--timeXLLong) var(--transitionBase),
-                opacity var(--timeXLLong) ease,
-                visibility var(--timeXLLong) ease;
-    
     opacity: 1;
     visibility: visible;
-    // transform: translateZ(0);
-    // will-change: transform;
+    transition: top var(--timeXLong) var(--transitionBase),
+                opacity var(--timeXLong) ease,
+                visibility var(--timeXLong) ease;
 
     &.is-hiding{
         opacity: 0;
         visibility: hidden;
+    }
+
+    .Card.is-selected{
+        opacity: 0;
     }
 
     .CardListing{
@@ -45,99 +25,48 @@
         max-height: 400px;
         margin-top: 1em;
         margin-bottom: 1em;
-
-        //width: 350%;    //NEED TO CALCULATE FROM JS (count num of items (.CardListing > .Card)
+        transition: width var(--timeLong) ease;
         display: flex;
-        margin-left: 2%; //15%;
+        margin-left: 2%;
         &.is-animating{
             transition: transform 200ms cubic-bezier( 0.5, 0, 0.5, 1 )
         }
-
-        //transition: padding-top var(--timeMedium) var(--transitionBase); 
-        //transition: all 3000 var(--transitionBase); 
-    }
-    
-
-    
-
-    // &.is-active{
-    //     //height: 37vh;
-    //     animation: cardListingWrapper 300ms var(--timeShort) forwards;
-        
-    //     position: fixed;
-    //     top: 0;
-    //     width:100%;
-        
-    //     .CardListing{
-    //         padding-top:0;
-    //         width: 500%;    //NEED TO CALCULATE FROM JS
-    //         margin:0;
-    //     }
-    //     .Card{
-    //         width:100%;
-    //         margin: 0;
-    //     }
-    // }
+    }    
 } 
-
-@keyframes cardListingWrapper{
-    from {
-        height: 70vh;
-    }
-    to {
-        height: 37vh
-    }
-}
-
-@keyframes fadeOut{
-    from {
-        opacity:1;
-    }
-    to {
-        opacity:0;
-    }
-}
 
 #Card-detail{
     visibility: hidden;
     opacity: 0;
-    top:27vh;
-    //max-height: 1px;
-    left:3%;
+    top:37vh;
     position: absolute;
     width:100%;
     background: #fff;
-    transform: scale(.7);
-    padding: 1rem;
-    transition: all 333ms ease;
-    transform-origin: left top;
+    transition: visibility 333ms ease,
+                opacity 333ms ease,
+                height 333ms ease;
+    //transform-origin: top;
     overflow: hidden;
+    height: 30vh;
 
-    transform: translateZ(0);
-    will-change: transform;
+    .Card-detailContent{
+        opacity:0;
+        animation: animatePaddingTop 500ms 300ms forwards;
+    }
 
     &.is-active{
         visibility: visible;
-        top: 37vh;
-        //max-height: 1000px;
+        //top: 37vh;
         left:0;
         opacity: 1;
-        transform: scale(1);
-    }
+        height: 100vh;
+    }    
 }
 
 
-
 .Card{
-    // border:1px solid rgba(255,255,255,.5);
-    // border-bottom-color: rgba(100,100,100,.75);
-    // border-right-color: rgba(100,100,100,.75);
     border: solid 4px #efefef;
     border-radius: 8px;
-
-    //box-shadow: 0 0 15px rgba(75,75,75,1);
     box-shadow: 0 0 5px #b5b5b5;
-
     background-color: #ccc;
     height: 60vh;
     max-height: 400px;
@@ -147,13 +76,13 @@
     transition: height var(--timeXLong) var(--transitionBase),
                 top 333ms ease,
                 left 333ms ease,
-                width 333ms ease;
-    margin: 0 1%;    
+                width 333ms ease,
+                border 333ms ease,
+                border-radius 333ms ease,
+                box-shadow 333ms ease;
+    margin: 0 10px; //1%;    
     text-align: center;
     float: left;
-
-    //  transform: translateZ(0);
-    //  will-change: transform;
 
     h2{
         transform: translateX(-50%);
@@ -161,41 +90,31 @@
         position: absolute;
         bottom: 0;
         color: rgba(255,255,255,.6);
-        //transition: all 600ms var(--transitionBase);
         width:100%;
     }
 
     &.is-fixed{
-        //animation: cardListingWrapper 300ms var(--timeShort) forwards;
-        
         position: fixed;
-        width: 65.8%; //63%;
+        width: 65.4%; //63%;
         z-index: 10;
         margin: 0;
-        box-shadow: 0 0 0 0;
     }
     &.is-top{
         position: fixed;
-
         top:0!important; 
-        left:0!important;
-        // top: 0;
-        // left: 0;
-        //transform: translate(0,0)!important;
-        
+        left:0!important;        
         width:100%;
         height: 37vh;
         margin:0;
-        border:0;
         &.is-now-abs{
             position: absolute;
+            box-shadow: 0 0 0 0;
+            border-radius: 0;
+            border:0;
         }
     }
 
     &.is-going-back{
-        // position: absolute;
-        // width:63%;
-        // margin: 0;
         animation: fadeOut 300ms forwards;
     }
 

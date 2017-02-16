@@ -14,6 +14,9 @@ body {
   background: #e1e1e1;
   font-family: 'Overpass', sans-serif;
 }
+p {
+  margin: 0 0 1em;
+}
 h1 {
   font-size: 1.4rem;
 }
@@ -398,30 +401,6 @@ textarea {
 [type="search"]::-webkit-search-decoration {
   -webkit-appearance: none;
 }
-.CardListingWrapper {
-  overflow: hidden;
-  z-index: 5;
-  position: relative;
-  transition: top 800ms cubic-bezier(0.215, 0.61, 0.355, 1), opacity 800ms ease, visibility 800ms ease;
-  opacity: 1;
-  visibility: visible;
-}
-.CardListingWrapper.is-hiding {
-  opacity: 0;
-  visibility: hidden;
-}
-.CardListingWrapper .CardListing {
-  height: 70vh;
-  max-height: 400px;
-  margin-top: 1em;
-  margin-bottom: 1em;
-  display: -ms-flexbox;
-  display: flex;
-  margin-left: 2%;
-}
-.CardListingWrapper .CardListing.is-animating {
-  transition: transform 200ms cubic-bezier(0.5, 0, 0.5, 1);
-}
 @keyframes cardListingWrapper {
   from {
     height: 70vh;
@@ -438,31 +417,68 @@ textarea {
     opacity: 0;
   }
 }
+@keyframes animatePaddingTop {
+  0% {
+    padding: 0 1em;
+    opacity: 0;
+    visibility: hidden;
+  }
+  100% {
+    padding: 1em;
+    opacity: 1;
+    visibility: visible;
+  }
+}
+.CardListingWrapper {
+  overflow: hidden;
+  z-index: 5;
+  position: relative;
+  opacity: 1;
+  visibility: visible;
+  transition: top 500ms cubic-bezier(0.215, 0.61, 0.355, 1), opacity 500ms ease, visibility 500ms ease;
+}
+.CardListingWrapper.is-hiding {
+  opacity: 0;
+  visibility: hidden;
+}
+.CardListingWrapper .Card.is-selected {
+  opacity: 0;
+}
+.CardListingWrapper .CardListing {
+  height: 70vh;
+  max-height: 400px;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  transition: width 400ms ease;
+  display: -ms-flexbox;
+  display: flex;
+  margin-left: 2%;
+}
+.CardListingWrapper .CardListing.is-animating {
+  transition: transform 200ms cubic-bezier(0.5, 0, 0.5, 1);
+}
 #Card-detail {
   visibility: hidden;
   opacity: 0;
-  top: 27vh;
-  left: 3%;
+  top: 37vh;
   position: absolute;
   width: 100%;
   background: #fff;
-  -ms-transform: scale(0.7);
-      transform: scale(0.7);
-  padding: 1rem;
-  transition: all 333ms ease;
-  -ms-transform-origin: left top;
-      transform-origin: left top;
+  transition: visibility 333ms ease,
+                opacity 333ms ease,
+                height 333ms ease;
   overflow: hidden;
-  transform: translateZ(0);
-  will-change: transform;
+  height: 30vh;
+}
+#Card-detail .Card-detailContent {
+  opacity: 0;
+  animation: animatePaddingTop 500ms 300ms forwards;
 }
 #Card-detail.is-active {
   visibility: visible;
-  top: 37vh;
   left: 0;
   opacity: 1;
-  -ms-transform: scale(1);
-      transform: scale(1);
+  height: 100vh;
 }
 .Card {
   border: solid 4px #efefef;
@@ -474,8 +490,8 @@ textarea {
   width: 70%;
   position: relative;
   background-size: cover;
-  transition: height 500ms cubic-bezier(0.215, 0.61, 0.355, 1), top 333ms ease, left 333ms ease, width 333ms ease;
-  margin: 0 1%;
+  transition: height 500ms cubic-bezier(0.215, 0.61, 0.355, 1), top 333ms ease, left 333ms ease, width 333ms ease, border 333ms ease, border-radius 333ms ease, box-shadow 333ms ease;
+  margin: 0 10px;
   text-align: center;
   float: left;
 }
@@ -490,10 +506,9 @@ textarea {
 }
 .Card.is-fixed {
   position: fixed;
-  width: 65.8%;
+  width: 65.4%;
   z-index: 10;
   margin: 0;
-  box-shadow: 0 0 0 0;
 }
 .Card.is-top {
   position: fixed;
@@ -502,10 +517,12 @@ textarea {
   width: 100%;
   height: 37vh;
   margin: 0;
-  border: 0;
 }
 .Card.is-top.is-now-abs {
   position: absolute;
+  box-shadow: 0 0 0 0;
+  border-radius: 0;
+  border: 0;
 }
 .Card.is-going-back {
   animation: fadeOut 300ms forwards;
