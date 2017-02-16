@@ -12,16 +12,21 @@ var postcss = require('gulp-postcss');
 var cssnext = require('postcss-cssnext');
 
 var paths = {
-        pages: ['src/*.html'],
-        images: ['src/img/*'],
-        source: './src',
-        sourceCSS: './src/styles/main.less',
+        pages:     ['src/*.html'],
+        images:    ['src/img/*'],
+        source:     './src',
+        sourceCSS:  './src/styles/main.less',
         sourceLESS: './src/styles/**/*.less',
-        dest: './dist',
-        destCSS:  './dist/styles/',
+        sourceJS:  ['src/js/vendor/hammer.min.js', 
+                    'src/js/vendor/hammer.jquery.js', 
+                    'src/js/main.js', 
+                    'src/js/slider.js'
+                   ],
         postCSSPlugins: [
             cssnext({ browsers: ['last 3 versions'] })
-        ]
+        ],
+        dest:      './dist',
+        destCSS:   './dist/styles/'
 };
 
 //task: "copy-html" copy html to destination
@@ -43,19 +48,19 @@ gulp.task("default", ["copy-html", "css", "js"], function () {
     
 });
 
+
+//task: "gulp js"
 gulp.task("js", function(){
     return browserify({
         basedir: '.',
         debug: true,
-        //entries: ['src/js/main.ts', 'src/js/vendor/hammer.min.js', 'src/js/slider.js'],
-        entries: ['src/js/vendor/hammer.min.js', 'src/js/vendor/hammer.jquery.js', 'src/js/main.js', 'src/js/slider.js'],
+        entries: paths.sourceJS,
         cache: {},
         packageCache: {}
     })
-        .plugin(tsify)
         .transform('babelify', {
             presets: ['es2015'],
-            extensions: ['.ts']
+            extensions: ['.js']
         })
         .bundle()
         .pipe(source('bundle.js'))
@@ -93,6 +98,29 @@ gulp.task('watch', ['browserSync'], function(){
 });
 
 
+
+
+// gulp.task("js", function(){
+//     return browserify({
+//         basedir: '.',
+//         debug: true,
+//         //entries: ['src/js/main.ts', 'src/js/vendor/hammer.min.js', 'src/js/slider.js'],
+//         entries: ['src/js/vendor/hammer.min.js', 'src/js/vendor/hammer.jquery.js', 'src/js/main.js', 'src/js/slider.js'],
+//         cache: {},
+//         packageCache: {}
+//     })
+//         .plugin(tsify)
+//         .transform('babelify', {
+//             presets: ['es2015'],
+//             extensions: ['.ts']
+//         })
+//         .bundle()
+//         .pipe(source('bundle.js'))
+//         .pipe(buffer())
+//         .pipe(sourcemaps.init({loadMaps: true}))
+//         .pipe(sourcemaps.write('./'))
+//         .pipe(gulp.dest('dist/js'));
+// });
 
 // Used for live typescript rendering...
 // var ts = require('gulp-typescript');
