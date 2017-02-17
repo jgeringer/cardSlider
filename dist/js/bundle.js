@@ -8,6 +8,12 @@ exports.default = cardLoader;
 
 var _constants = require('./constants');
 
+var _moduleSticky = require('./module-sticky.js');
+
+var moduleSticky = _interopRequireWildcard(_moduleSticky);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
 function cardLoader() {
 
     //global vars
@@ -68,17 +74,20 @@ function cardLoader() {
                 $elClone.addClass('is-now-abs');
                 cardDetail.classList.add('is-active');
 
-                //simulate slow connection...
-                //setTimeout(function(){
+                //ajax coming soon!
                 cardDetail.insertAdjacentHTML('beforeend', data);
-                //}, 200);
-
             }, 100);
         }, 20);
+
+        setTimeout(function () {
+            moduleSticky.enable("body > .Card .Card--footer"); //find a better way to target this
+        }, 500);
 
         //Button Close Click...    
         $('.Button--close').hammer().off('tap.closeClone').on('tap.closeClone', function (e) {
             e.preventDefault();
+
+            moduleSticky.disable("body > .Card .Card--footer");
 
             cardListing.style.width = cardListingInitWidth;
 
@@ -109,7 +118,7 @@ function cardLoader() {
     });
 }
 
-},{"./constants":2}],2:[function(require,module,exports){
+},{"./constants":2,"./module-sticky.js":4}],2:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -130,13 +139,42 @@ var _card2 = _interopRequireDefault(_card);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-//import everything from card.js to here...
-
 (0, _card2.default)();
 
-console.log('in main.js');
-
 },{"./card":1}],4:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.enable = enable;
+exports.disable = disable;
+function enable(el) {
+
+    var stickyEl = document.querySelector(el),
+        heroHeight = $(el).offset().top - $(window).scrollTop();
+
+    $(window).on('scroll.moduleSticky', function (e) {
+        //if it hits the top of the viewport, then add .is-sticky class to the element.
+
+        console.log($(window).scrollTop() + " | " + heroHeight);
+
+        if ($(window).scrollTop() > heroHeight) {
+            stickyEl.classList.add('is-sticky');
+        } else {
+            stickyEl.classList.remove('is-sticky');
+        }
+    });
+}
+
+function disable(el) {
+    console.log('disabled sticky and turn off scroll event');
+
+    document.querySelector(el).classList.remove('is-sticky');
+    $(window).off('scroll.moduleSticky');
+}
+
+},{}],5:[function(require,module,exports){
 'use strict';
 
 // 1. Basic object for our stuff
@@ -223,7 +261,7 @@ slider.goTo = function (number) {
 
 slider.init('.CardListing');
 
-},{}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 "use strict";
 
 function hammerify(el, options) {
@@ -250,7 +288,7 @@ Hammer.Manager.prototype.emit = function (originalEmit) {
     };
 }(Hammer.Manager.prototype.emit);
 
-},{}],6:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 "use strict";
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -736,6 +774,6 @@ console.log('hello from hammer');
 }(window, document, "Hammer");
 
 
-},{}]},{},[6,5,3,4])
+},{}]},{},[7,6,3,5])
 
 //# sourceMappingURL=bundle.js.map

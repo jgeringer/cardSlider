@@ -1,5 +1,5 @@
 import { CARDINITWIDTH, CARDFULLWIDTH } from './constants';
-
+import * as moduleSticky from './module-sticky.js';
 
 export default function cardLoader(){
 
@@ -88,15 +88,16 @@ export default function cardLoader(){
                 $elClone.addClass('is-now-abs');
                 cardDetail.classList.add('is-active');
 
-                //simulate slow connection...
-                //setTimeout(function(){
-                    cardDetail.insertAdjacentHTML('beforeend', data);
-                //}, 200);
+                //ajax coming soon!
+                cardDetail.insertAdjacentHTML('beforeend', data);                
                 
-
             }, 100);
         }, 20);
 
+
+        setTimeout(function(){
+            moduleSticky.enable("body > .Card .Card--footer");  //find a better way to target this
+        }, 500);
 
 
 
@@ -104,6 +105,8 @@ export default function cardLoader(){
         $('.Button--close').hammer().off('tap.closeClone').on('tap.closeClone', function(e){
             e.preventDefault();
             
+            moduleSticky.disable("body > .Card .Card--footer");
+
             cardListing.style.width = cardListingInitWidth;
 
             cardDetail.classList.remove('is-active');

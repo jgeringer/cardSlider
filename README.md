@@ -29,6 +29,12 @@
 
 ##JS
 [TypeScript Gulp Build System](https://www.typescriptlang.org/docs/handbook/gulp.html)
+[ES2015 Notes](https://babeljs.io/learn-es2015/)
 
 ##To Do:
-* Add carousel functionality
+* ~~Add carousel functionality~~
+* Card Details
+** Scroll down -> fix hero image, then make header sticky
+** Fix sticky menu so it fires right away on mobile
+** Replace crappy setTimeouts with promises. 
+** Fix background attachement fixed on mobile: http://jsfiddle.net/QN9cH/1/
