@@ -7,12 +7,15 @@ export function enable(el){
         //if it hits the top of the viewport, then add .is-sticky class to the element.
 
         console.log($(window).scrollTop() + " | " + heroHeight);
+        let scrolledY = $(window).scrollTop();
 
-        if($(window).scrollTop() > heroHeight){
+        if(scrollY > heroHeight){
             stickyEl.classList.add('is-sticky');
         } else {
             stickyEl.classList.remove('is-sticky');
+            //document.querySelector('body > .Card').style.backgroundPositionY = scrollY + "px"; //('background-position', 'left ' + ((scrolledY)) + 'px');
         }
+
 
     });
 

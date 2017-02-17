@@ -33,8 +33,9 @@
 
 ##To Do:
 * ~~Add carousel functionality~~
-* Card Details
-** Scroll down -> fix hero image, then make header sticky
-** Fix sticky menu so it fires right away on mobile
-** Replace crappy setTimeouts with promises. 
-** Fix background attachement fixed on mobile: http://jsfiddle.net/QN9cH/1/
+
+Card Details: 
+* Scroll down -> fix hero image
+* ~~Fix sticky menu so it fires right away on mobile~~
+* Replace crappy setTimeouts with promises. 
+* Fix background attachement fixed on mobile: http://jsfiddle.net/QN9cH/1/
