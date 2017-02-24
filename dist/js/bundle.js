@@ -107,7 +107,7 @@ function cardLoader() {
             cardListingWrapper.classList.toggle('is-hiding');
 
             setTimeout(function () {
-                //$elClone.remove();
+                $elClone.remove();
 
                 $el.removeClass('is-selected');
 
