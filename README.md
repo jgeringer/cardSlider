@@ -33,6 +33,9 @@
 
 ##To Do:
 * ~~Add carousel functionality~~
+* Destroy hammer when going from mobile and up
+* Make cards have href on them
+* Replace mobile image with smaller dimensions. The performance on mobile is way better this way.
 
 Card Details: 
 * Scroll down -> fix hero image

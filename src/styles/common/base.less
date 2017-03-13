@@ -56,3 +56,18 @@ h5{
 .u-bgPos--topLeft{
     background-position: 0 100%;
 }
+
+body:before {
+  content: "bpSmall";
+  display: none; /* Prevent from displaying. */
+}
+@media @bpMedium{
+  body:before {
+    content: "bpMedium";
+  }
+}
+@media @bpLarge {
+  body:before {
+    content: "bpMedium";
+  }
+}

@@ -18,7 +18,28 @@
     // --timeXLong: 1500ms;
 
     --cardWidth: 70%;
+    --cardWidth--md: 48%;
+    --cardWidth--lg: 31%;
+
+    
 }
+
+@baseFontSize: 16;
+
+// - Breakpoint Widths -
+@widthXSmall: (420  / @baseFontSize);
+@widthSmall:  (544  / @baseFontSize);
+@widthMedium: (768  / @baseFontSize);
+@widthLarge:  (920  / @baseFontSize);
+@widthXLarge: (1600 / @baseFontSize);
+
+@for-phone-only: ~"only screen and (max-width:@{widthMedium}em), print";
+@bpXSmall: ~"only screen and (min-width: @{widthXSmall}em), print";
+@bpSmall: ~"only screen and (min-width: @{widthSmall}em), print";
+@bpMedium: ~"only screen and (min-width: @{widthMedium}em), print";
+@bpLarge: ~"only screen and (min-width: @{widthLarge}em), print";
+@bpXLarge: ~"only screen and (min-width: @{widthXLarge}em)";
+
 
 @keyframes cardListingWrapper{
     from {

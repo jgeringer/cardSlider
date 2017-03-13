@@ -4,6 +4,41 @@
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
+exports.refreshValue = refreshValue;
+exports.isMobile = isMobile;
+exports.bpChange = bpChange;
+function refreshValue() {
+    window.bpValue = window.getComputedStyle(document.querySelector('body'), ':before').getPropertyValue('content').replace(/\"/g, '');
+    return bpValue;
+}
+
+function isMobile() {
+    if (refreshValue() == 'bpSmall') {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function bpChange() {
+    var currBpValue = window.bpValue;
+
+    console.log('refreshValue.bpValue:' + refreshValue() + " | currBpValue: " + currBpValue);
+
+    if (window.bpValue != currBpValue) {
+        return true;
+    } else {
+        //console.log('same!');
+        return false;
+    }
+}
+
+},{}],2:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
 exports.default = cardLoader;
 
 var _constants = require('./constants');
@@ -11,6 +46,10 @@ var _constants = require('./constants');
 var _moduleSticky = require('./module-sticky.js');
 
 var moduleSticky = _interopRequireWildcard(_moduleSticky);
+
+var _breakpoint = require('./breakpoint.js');
+
+var breakpoint = _interopRequireWildcard(_breakpoint);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -21,11 +60,28 @@ function cardLoader() {
         cardListing = document.querySelector('.CardListing'),
         card = document.querySelectorAll('.Card'),
         cardLength = card.length,
-        cardListingInitWidth = cardLength * _constants.CARDINITWIDTH + '%',
-        cardListingFullWidth = cardLength * _constants.CARDFULLWIDTH + '%';
+
+    //cardListingInitWidth = `${cardLength * (breakpoint.isMobile() ? CARDINITWIDTH : CARDINITWIDTHMD)}%`,
+    cardListingInitWidth = (breakpoint.isMobile() ? cardLength * _constants.CARDINITWIDTH : 100) + '%',
+        cardListingFullWidth = cardLength * _constants.CARDINITWIDTH + '%';
 
     //set the width the of the card container.
     cardListing.style.width = cardListingInitWidth;
+
+    $(window).on('resize.checkBreakpoint', function () {
+        if (breakpoint.bpChange()) {
+            console.log('changed!!!');
+            //cardListingInitWidth = `${cardLength * (breakpoint.isMobile() ? CARDINITWIDTH : CARDINITWIDTHMD)}%`;
+            cardListingInitWidth = (breakpoint.isMobile() ? cardLength * _constants.CARDINITWIDTH : 100) + '%', cardListing.style.width = cardListingInitWidth;
+        }
+    }).trigger('resize.checkBreakpoint');
+
+    // if(breakpoint.isMobile()){
+    //     console.log('mobile!');
+    // } else{
+    //     console.log('NOT mobile!');
+    // }
+
 
     //sample data
     var dogs = [{ name: 'Snickers', age: 2 }, { name: 'Hardy', age: 6 }, { name: 'Chloe', age: 8 }];
@@ -37,19 +93,19 @@ function cardLoader() {
     //Tapping begin!
     $('.Card').hammer().off("tap.cardOpen").on("tap.cardOpen", function (e) {
         console.log('hammer time');
-        e.preventDefault();e.stopPropagation();
+        e.preventDefault();
+        e.stopPropagation();
 
         var $el = $(this);
 
-        cardListing.style.width = cardListingFullWidth;
-
-        $el.siblings().removeClass('is-selected');
-        $el.addClass('is-selected');
+        //cardListing.style.width = cardListingFullWidth;
 
         var $currY = $(window).scrollTop(),
             $elX = $el.offset().left,
             $elY = $el.offset().top - $currY;
 
+        $el.siblings().removeClass('is-selected');
+        $el.addClass('is-selected');
         cardListingWrapper.classList.toggle('is-hiding');
 
         var $elClone = $el.clone().appendTo('body');
@@ -100,8 +156,8 @@ function cardLoader() {
             $elClone.removeClass('is-top');
 
             $elClone.css({
-                top: $('.Card.is-selected').offset().top - $(window).scrollTop(),
-                left: $('.Card.is-selected').offset().left
+                top: $('.Card.is-selected').offset().top - $(window).scrollTop()
+                //,left: $('.Card.is-selected').offset().left
             });
 
             cardListingWrapper.classList.toggle('is-hiding');
@@ -118,19 +174,18 @@ function cardLoader() {
     });
 }
 
-},{"./constants":2,"./module-sticky.js":4}],2:[function(require,module,exports){
-'use strict';
+},{"./breakpoint.js":1,"./constants":3,"./module-sticky.js":5}],3:[function(require,module,exports){
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 //global vars
-var CARDINITWIDTH = exports.CARDINITWIDTH = 70;
+var CARDINITWIDTH = exports.CARDINITWIDTH = 70; //Mobile (default)
+var CARDINITWIDTHMD = exports.CARDINITWIDTHMD = 50; //Above mobile
 var CARDFULLWIDTH = exports.CARDFULLWIDTH = 100;
 
-console.log('hello from constants');
-
-},{}],3:[function(require,module,exports){
+},{}],4:[function(require,module,exports){
 'use strict';
 
 var _card = require('./card');
@@ -141,7 +196,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 (0, _card2.default)();
 
-},{"./card":1}],4:[function(require,module,exports){
+},{"./card":2}],5:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -176,7 +231,7 @@ function disable(el) {
     $(window).off('scroll.moduleSticky');
 }
 
-},{}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 'use strict';
 
 // 1. Basic object for our stuff
@@ -263,7 +318,7 @@ slider.goTo = function (number) {
 
 slider.init('.CardListing');
 
-},{}],6:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 "use strict";
 
 function hammerify(el, options) {
@@ -290,7 +345,7 @@ Hammer.Manager.prototype.emit = function (originalEmit) {
     };
 }(Hammer.Manager.prototype.emit);
 
-},{}],7:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 "use strict";
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -776,6 +831,6 @@ console.log('hello from hammer');
 }(window, document, "Hammer");
 
 
-},{}]},{},[7,6,3,5])
+},{}]},{},[8,7,4,6])
 
 //# sourceMappingURL=bundle.js.map

@@ -1,5 +1,7 @@
-import { CARDINITWIDTH, CARDFULLWIDTH } from './constants';
+import { CARDFULLWIDTH, CARDINITWIDTH, CARDINITWIDTHMD } from './constants';
 import * as moduleSticky from './module-sticky.js';
+import * as breakpoint from './breakpoint.js';
+
 
 export default function cardLoader(){
 
@@ -8,12 +10,28 @@ export default function cardLoader(){
         cardListing = document.querySelector('.CardListing'),
         card = document.querySelectorAll('.Card'),
         cardLength = card.length,
-        cardListingInitWidth = `${cardLength * CARDINITWIDTH}%`,
-        cardListingFullWidth = `${cardLength * CARDFULLWIDTH}%`;
-
+        //cardListingInitWidth = `${cardLength * (breakpoint.isMobile() ? CARDINITWIDTH : CARDINITWIDTHMD)}%`,
+        cardListingInitWidth = `${(breakpoint.isMobile() ? cardLength * CARDINITWIDTH : 100 )}%`,
+        cardListingFullWidth = `${cardLength * CARDINITWIDTH}%`;
 
     //set the width the of the card container.
     cardListing.style.width = cardListingInitWidth;
+
+    $(window).on('resize.checkBreakpoint', function () {
+        if(breakpoint.bpChange()){
+            console.log('changed!!!');
+            //cardListingInitWidth = `${cardLength * (breakpoint.isMobile() ? CARDINITWIDTH : CARDINITWIDTHMD)}%`;
+            cardListingInitWidth = `${(breakpoint.isMobile() ? cardLength * CARDINITWIDTH : 100 )}%`,
+            cardListing.style.width = cardListingInitWidth;
+        }
+    }).trigger('resize.checkBreakpoint');
+
+    // if(breakpoint.isMobile()){
+    //     console.log('mobile!');
+    // } else{
+    //     console.log('NOT mobile!');
+    // }
+
 
 
     //sample data
@@ -51,19 +69,19 @@ export default function cardLoader(){
     //Tapping begin!
     $('.Card').hammer().off("tap.cardOpen").on("tap.cardOpen", function(e){
         console.log('hammer time');
-        e.preventDefault();e.stopPropagation();
+        e.preventDefault();
+        e.stopPropagation();
 
         let $el = $(this);
 
-        cardListing.style.width = cardListingFullWidth;
-
-        $el.siblings().removeClass('is-selected');
-        $el.addClass('is-selected');
+        //cardListing.style.width = cardListingFullWidth;
         
         let $currY = $(window).scrollTop(),
             $elX = $el.offset().left,
             $elY = $el.offset().top - $currY;
 
+        $el.siblings().removeClass('is-selected');
+        $el.addClass('is-selected');
         cardListingWrapper.classList.toggle('is-hiding');
 
         var $elClone = $el.clone().appendTo('body');
@@ -118,8 +136,8 @@ export default function cardLoader(){
             $elClone.removeClass('is-top');
 
             $elClone.css({
-                top: $('.Card.is-selected').offset().top- $(window).scrollTop(),
-                left: $('.Card.is-selected').offset().left
+                top: $('.Card.is-selected').offset().top- $(window).scrollTop()
+                //,left: $('.Card.is-selected').offset().left
             });
 
             cardListingWrapper.classList.toggle('is-hiding');                  

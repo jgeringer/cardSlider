@@ -1,5 +1,4 @@
 //global vars
-export const CARDINITWIDTH = 70;
-export const CARDFULLWIDTH = 100;
-
-console.log('hello from constants');
+export const CARDINITWIDTH      = 70;   //Mobile (default)
+export const CARDINITWIDTHMD    = 50; //Above mobile
+export const CARDFULLWIDTH      = 100;
