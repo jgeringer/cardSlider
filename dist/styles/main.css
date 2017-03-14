@@ -547,6 +547,8 @@ body > .Card.is-selected.is-top {
   transition: height 500ms cubic-bezier(0.215, 0.61, 0.355, 1), top 333ms ease, left 333ms ease, width 333ms ease, border 333ms ease, border-radius 333ms ease, box-shadow 333ms ease;
   margin: 0 20px 0 0;
   width: 70%;
+  will-change: top, left, height, width;
+  background-size: cover;
 }
 @media only screen and (min-width: 48em), print {
   .Card {

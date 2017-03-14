@@ -115,6 +115,9 @@ body > .Card{
                 box-shadow 333ms ease;
     margin: 0 20px 0 0;
     width: var(--cardWidth);
+    will-change: top, left, height, width;
+
+    background-size: cover;
     
     @media @bpMedium {
         background-size: cover;

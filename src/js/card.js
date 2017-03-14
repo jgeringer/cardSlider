@@ -64,13 +64,11 @@ export default function cardLoader(){
         </ol>
     `;    
 
-
-
     //Tapping begin!
     $('.Card').hammer().off("tap.cardOpen").on("tap.cardOpen", function(e){
         console.log('hammer time');
         e.preventDefault();
-        e.stopPropagation();
+        e.stopPropagation(); 
 
         let $el = $(this);
 
@@ -85,6 +83,7 @@ export default function cardLoader(){
         cardListingWrapper.classList.toggle('is-hiding');
 
         var $elClone = $el.clone().appendTo('body');
+        //var $elClone = $el.appendTo('body');
 
         $elClone.prepend('<button class="Button Button--close">close me</button>');
 
@@ -131,12 +130,15 @@ export default function cardLoader(){
 
             //first giv it a position fixed, with the top position of exactly where it is in the viewport
             $('html, body').scrollTop($currY);
-            $elClone.removeClass('is-now-abs');
 
+            $elClone.removeClass('is-now-abs');
             $elClone.removeClass('is-top');
 
+            console.log('top:', $('.CardListingWrapper .Card.is-selected').offset().top);
+            console.log('stop:', $(window).scrollTop());
+
             $elClone.css({
-                top: $('.Card.is-selected').offset().top- $(window).scrollTop()
+                top: $('.CardListingWrapper .Card.is-selected').offset().top - $(window).scrollTop()
                 //,left: $('.Card.is-selected').offset().left
             });
 
