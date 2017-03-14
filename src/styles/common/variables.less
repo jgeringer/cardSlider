@@ -21,7 +21,8 @@
     --cardWidth--md: 48%;
     --cardWidth--lg: 31%;
 
-    
+    --cardVH: 37vh;
+    --cardVH--md: 80vh;
 }
 
 @baseFontSize: 16;
@@ -69,5 +70,14 @@
         padding: 1em;
         opacity: 1;
         visibility: visible;
+    }
+}
+
+@keyframes animateBgColor {
+    0%{
+        color:#fff;
+    }
+    100%{
+        color:#000;
     }
 }

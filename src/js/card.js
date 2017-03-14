@@ -64,6 +64,11 @@ export default function cardLoader(){
         </ol>
     `;    
 
+
+    $('.Card').off('click').on('click', function(e){
+        //$(document).off('pan.hammerPan');
+    });
+
     //Tapping begin!
     $('.Card').hammer().off("tap.cardOpen").on("tap.cardOpen", function(e){
         console.log('hammer time');
@@ -77,6 +82,7 @@ export default function cardLoader(){
         let $currY = $(window).scrollTop(),
             $elX = $el.offset().left,
             $elY = $el.offset().top - $currY;
+
 
         $el.siblings().removeClass('is-selected');
         $el.addClass('is-selected');
@@ -127,6 +133,7 @@ export default function cardLoader(){
             cardListing.style.width = cardListingInitWidth;
 
             cardDetail.classList.remove('is-active');
+            
 
             //first giv it a position fixed, with the top position of exactly where it is in the viewport
             $('html, body').scrollTop($currY);

@@ -29,11 +29,12 @@ slider.init = function( selector ) {
   }
   
   // 4d. Set up HammerJS
-  var sliderManager = new Hammer.Manager( slider.sliderEl );
+  var sliderManager = new Hammer.Manager( slider.sliderEl ); //, { domEvents: true }
   sliderManager.add( new Hammer.Pan({ threshold: 20, pointers: 0, direction: Hammer.DIRECTION_HORIZONTAL }) ); //direction: Hammer.DIRECTION_RIGHT
 
 
   sliderManager.on( 'pan', function( e ) {    
+    e.preventDefault();
     // 4e. Calculate pixel movements into 1:1 screen percents so gestures track with motion
     var percentage = 100 / slider.slideCount * e.deltaX / window.innerWidth;
     
@@ -60,6 +61,8 @@ slider.init = function( selector ) {
     }
   });
 };
+
+
 
 // 5. Update current slide
 slider.goTo = function( number ) {

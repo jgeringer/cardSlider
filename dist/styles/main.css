@@ -450,6 +450,14 @@ textarea {
     visibility: visible;
   }
 }
+@keyframes animateBgColor {
+  0% {
+    color: #fff;
+  }
+  100% {
+    color: #000;
+  }
+}
 .CardListingWrapper {
   overflow: hidden;
   z-index: 5;
@@ -484,6 +492,8 @@ textarea {
     max-height: initial;
     margin-left: 0;
     padding-right: 2%;
+    -ms-transform: translateX(0) !important;
+        transform: translateX(0) !important;
   }
 }
 @media only screen and (min-width: 57.5em), print {
@@ -507,6 +517,11 @@ textarea {
   overflow: hidden;
   height: 30vh;
 }
+@media only screen and (min-width: 48em), print {
+  #Card-detail {
+    top: 80vh;
+  }
+}
 #Card-detail .Card-detailContent {
   opacity: 0;
   animation: animatePaddingTop 500ms 300ms forwards;
@@ -516,6 +531,8 @@ textarea {
   left: 0;
   opacity: 1;
   height: 100vh;
+  z-index: 50;
+  height: auto;
 }
 body > .Card.is-selected {
   width: calc(70% - 20px);
@@ -534,9 +551,7 @@ body > .Card.is-selected.is-top {
   width: 100%;
 }
 .Card {
-  border: solid 4px #efefef;
-  border-radius: 8px;
-  box-shadow: 0 0 5px #b5b5b5;
+  box-shadow: 0 5px 10px #b5b5b5;
   background-color: #ccc;
   height: 60vh;
   max-height: 400px;
@@ -544,7 +559,7 @@ body > .Card.is-selected.is-top {
   text-align: center;
   float: left;
   display: flex-item;
-  transition: height 500ms cubic-bezier(0.215, 0.61, 0.355, 1), top 333ms ease, left 333ms ease, width 333ms ease, border 333ms ease, border-radius 333ms ease, box-shadow 333ms ease;
+  transition: height 500ms cubic-bezier(0.215, 0.61, 0.355, 1), top 333ms ease, left 333ms ease, width 333ms ease, border-radius 333ms ease, box-shadow 333ms ease;
   margin: 0 20px 0 0;
   width: 70%;
   will-change: top, left, height, width;
@@ -555,6 +570,8 @@ body > .Card.is-selected.is-top {
     background-size: cover;
     width: 48%;
     margin: 0 0 2% 2%;
+    max-height: none;
+    max-height: initial;
   }
 }
 @media only screen and (min-width: 57.5em), print {
@@ -568,11 +585,13 @@ body > .Card.is-selected.is-top {
       transform: translate(-50%, -50%);
   left: 50%;
   position: absolute;
-  color: rgba(255, 255, 255, .6);
+  color: #8c8c8c;
   width: 100%;
   top: 50%;
   margin: 0;
   padding: .5rem;
+  font-weight: 200;
+  line-height: 1.6rem;
 }
 .Card.is-fixed {
   position: fixed;
@@ -587,11 +606,19 @@ body > .Card.is-selected.is-top {
   height: 37vh;
   margin: 0;
 }
+@media only screen and (min-width: 48em), print {
+  .Card.is-top {
+    height: 80vh;
+  }
+}
 .Card.is-top.is-now-abs {
   position: absolute;
   box-shadow: 0 0 0 0;
   border-radius: 0;
   border: 0;
+}
+.Card.is-top.is-now-abs .Card--footer {
+  background-color: #e8e8e8;
 }
 .Card.is-going-back {
   animation: fadeOut 300ms forwards;
@@ -604,6 +631,11 @@ body > .Card.is-selected.is-top {
   border: 0;
   margin: 0 auto;
 }
+@media only screen and (min-width: 48em), print {
+  .Card.is-active {
+    height: 80vh;
+  }
+}
 .Card.is-active h2 {
   -ms-transform: translateX(0%);
       transform: translateX(0%);
@@ -615,9 +647,10 @@ body > .Card.is-selected.is-top {
   bottom: 0;
   left: 0;
   width: 100%;
-  background: rgba(46, 80, 93, .9);
+  background-color: #fff;
   height: 82px;
   transform: translate3d(0px, 0px, 0px);
+  transition: background-color 500ms ease;
 }
 .Card--footer.is-sticky {
   position: fixed;
