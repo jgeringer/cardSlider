@@ -2,7 +2,7 @@
 window.slider = {};
 
 // 2. Settings
-slider.sliderPanelSelector = '.Card';
+slider.sliderPanelSelector = '.CardListing .Card';
 slider.sliderPaginationSelector = '.slider-pagination';
 slider.sensitivity = 25 // horizontal % needed to trigger swipe
 

@@ -15,7 +15,7 @@ export default function cardLoader(){
         cardListingFullWidth = `${cardLength * CARDINITWIDTH}%`;
 
     //set the width the of the card container.
-    cardListing.style.width = cardListingInitWidth;
+    //cardListing.style.width = cardListingInitWidth;
 
     $(window).on('resize.checkBreakpoint', function () {
         if(breakpoint.bpChange()){
@@ -64,8 +64,35 @@ export default function cardLoader(){
         </ol>
     `;    
 
+
+//NEW SWIPER
+var swiper = new Swiper('.swiper-container', {
+        //pagination: '.swiper-pagination',
+        slidesPerView: 4,
+        centeredSlides: true,
+        paginationClickable: true,
+        spaceBetween: 30
+    });
+
+// var mySwiper = new Swiper ('.swiper-container', {
+//     // Optional parameters
+//     direction: 'horizontal',
+//     loop: true,
+    
+//     // If we need pagination
+//     pagination: '.swiper-pagination',
+    
+//     // Navigation arrows
+//     nextButton: '.swiper-button-next',
+//     prevButton: '.swiper-button-prev',
+    
+//     // And if we need scrollbar
+//     scrollbar: '.swiper-scrollbar',
+//   });
+
+
     //Tapping begin!
-    $('.Card').hammer().off("tap.cardOpen").on("tap.cardOpen", function(e){
+    $(document).on("click.cardOpen", ".swiper-slide", function(e){ //$('.Card').off("click.cardOpen").on("click.cardOpen", function(e){
         console.log('hammer time');
         e.preventDefault();
         e.stopPropagation(); 
@@ -78,9 +105,13 @@ export default function cardLoader(){
             $elX = $el.offset().left,
             $elY = $el.offset().top - $currY;
 
+            console.log($elX);
+            console.log($elY);
+
         $el.siblings().removeClass('is-selected');
         $el.addClass('is-selected');
-        cardListingWrapper.classList.toggle('is-hiding');
+
+        
 
         var $elClone = $el.clone().appendTo('body');
         //var $elClone = $el.appendTo('body');
@@ -91,6 +122,8 @@ export default function cardLoader(){
             top: $elY,
             left: $elX
         });
+
+return;
 
         $elClone.addClass('is-fixed');
 
@@ -113,13 +146,13 @@ export default function cardLoader(){
 
 
         setTimeout(function(){
-            moduleSticky.enable("body > .Card .Card--footer");  //find a better way to target this
+            //moduleSticky.enable("body > .Card .Card--footer");  //find a better way to target this
         }, 500);
 
 
 
         //Button Close Click...    
-        $('.Button--close').hammer().off('tap.closeClone').on('tap.closeClone', function(e){
+        $('.Button--close').off('click.closeClone').on('click.closeClone', function(e){
             e.preventDefault();
             
             moduleSticky.disable("body > .Card .Card--footer");

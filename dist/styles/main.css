@@ -633,5 +633,91 @@ body > .Card.is-selected.is-top {
   right: 0;
   z-index: 15;
 }
+body {
+  background: #eee;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  color: #000;
+  margin: 0;
+  padding: 0;
+}
+.swiper-container {
+  width: 100%;
+  height: 300px;
+  margin: 20px auto;
+}
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+  width: 60%;
+  /* Center slide text vertically */
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+.swiper-slide:nth-child(2n) {
+  width: 40%;
+}
+.swiper-slide:nth-child(3n) {
+  width: 20%;
+}
+body > .swiper-slide {
+  width: 100%!important;
+}
+.swiper-slide {
+  transition: height 500ms cubic-bezier(0.215, 0.61, 0.355, 1), top 333ms ease, left 333ms ease, width 333ms ease, border 333ms ease, border-radius 333ms ease, box-shadow 333ms ease;
+}
+.swiper-slide.is-top {
+  position: fixed;
+  top: 0!important;
+  left: 0!important;
+  width: 100%;
+  height: 37vh;
+  margin: 0;
+}
+.swiper-slide.is-top.is-now-abs {
+  position: absolute;
+  box-shadow: 0 0 0 0;
+  border-radius: 0;
+  border: 0;
+}
+.swiper-slide.is-going-back {
+  animation: fadeOut 300ms forwards;
+}
+.swiper-slide.is-active {
+  width: 100%;
+  height: 37vh;
+  box-shadow: none;
+  text-align: left;
+  border: 0;
+  margin: 0 auto;
+}
+.swiper-slide.is-active h2 {
+  -ms-transform: translateX(0%);
+      transform: translateX(0%);
+  left: 2rem;
+  color: #ffffff;
+}
+.swiper-slide--footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(46, 80, 93, .9);
+  height: 82px;
+  transform: translate3d(0px, 0px, 0px);
+}
+.swiper-slide--footer.is-sticky {
+  position: fixed;
+  top: 0;
+}
+.swiper-slide--footer > div {
+  position: relative;
+  height: 82px;
+}
 
 /*# sourceMappingURL=main.css.map */

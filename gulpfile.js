@@ -17,10 +17,10 @@ var paths = {
         source:     './src',
         sourceCSS:  './src/styles/main.less',
         sourceLESS: './src/styles/**/*.less',
-        sourceJS:  ['src/js/vendor/hammer.min.js', 
-                    'src/js/vendor/hammer.jquery.js', 
-                    'src/js/main.js', 
-                    'src/js/slider.js'
+        sourceJS:  [
+                    //'src/js/vendor/swiper.min.js', 
+                    'src/js/main.js' 
+                    //'src/js/slider.js'
                    ],
         postCSSPlugins: [
             cssnext({ browsers: ['last 3 versions'] })
