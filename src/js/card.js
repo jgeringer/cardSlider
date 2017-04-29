@@ -17,6 +17,35 @@ export default function cardLoader(){
     //set the width the of the card container.
     cardListing.style.width = cardListingInitWidth;
 
+
+    //new carousel
+    var swiper = new Swiper('.swiper-container', {
+        pagination: '.swiper-pagination',
+        paginationClickable: true,
+        slidesPerView: 5,
+        //spaceBetween: 50,
+        breakpoints: {
+            1024: {
+                slidesPerView: 4,
+                spaceBetween: 40
+            },
+            768: {
+                slidesPerView: 1.5,
+                spaceBetween: 30
+            },
+            // 640: {
+            //     slidesPerView: 2,
+            //     spaceBetween: 20
+            // },
+            320: {
+                slidesPerView: 1.5,
+                spaceBetween: 10
+            }
+        }
+    });   
+
+
+
     $(window).on('resize.checkBreakpoint', function () {
         if(breakpoint.bpChange()){
             console.log('changed!!!');
@@ -75,8 +104,7 @@ export default function cardLoader(){
     });
 
     //Tapping begin!
-    $('.Card').hammer().off("tap.cardOpen").on("tap.cardOpen", function(e){
-        console.log('hammer time');
+    $('.Card').off("click.cardOpen").on("click.cardOpen", function(e){
         e.preventDefault();
         e.stopPropagation(); 
 
@@ -119,19 +147,10 @@ export default function cardLoader(){
                 //ajax coming soon!
                 cardDetail.insertAdjacentHTML('beforeend', data);                
                 
-
-                //Load in the carousel at the top.
-        
-        
-        
-        slider.init('.CardCarousel', '.CardCarousel > *');
-                
-
-
+                //Load in the carousel at the top.        
+                //slider.init('.CardCarousel', '.CardCarousel > *');
             }, 100);
         }, 20);
-
-
         
 
 
@@ -142,7 +161,7 @@ export default function cardLoader(){
 
 
         //Button Close Click...    
-        $('.Button--close').hammer().off('tap.closeClone').on('tap.closeClone', function(e){
+        $('.Button--close').off('click.closeClone').on('click.closeClone', function(e){
             e.preventDefault();
             
             moduleSticky.disable("body > .Card .Card--footer");

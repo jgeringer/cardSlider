@@ -19,15 +19,16 @@ var paths = {
         source:     './src',
         sourceCSS:  './src/styles/main.less',
         sourceLESS: './src/styles/**/*.less',
-        sourceJS:  ['src/js/vendor/hammer.min.js',
-                    'src/js/vendor/hammer.jquery.js',
+        sourceJS:  [//'src/js/vendor/hammer.min.js',
+                    //'src/js/vendor/hammer.jquery.js',
                     'src/js/main.js',
-                    'src/js/slider.js'
+                    //'src/js/slider.js'
                    ],
         sourceJSindividual:  [
                     'src/js/contentful.js',
                     'src/js/vue.min.js',
-                    'src/js/vue-router.js'
+                    'src/js/vue-router.js',
+                    'src/js/vendor/swiper.min.js'
         ],
         postCSSPlugins: [
             cssnext({ browsers: ['last 3 versions'] })
@@ -87,11 +88,6 @@ gulp.task('browserSync', function() {
   browserSync.init({
     server: {
       baseDir: './dist',
-      //index: './dist/contentful/',
-    //   middleware: [
-    //     historyApiFallback,
-    //     modRewrite(['!\\.\\w+ /index.html [L]'])
-    //   ]
     },
   })
 });
@@ -116,51 +112,3 @@ gulp.task('watch', ['browserSync'], function(){
 });
 
 
-
-
-// gulp.task("js", function(){
-//     return browserify({
-//         basedir: '.',
-//         debug: true,
-//         //entries: ['src/js/main.ts', 'src/js/vendor/hammer.min.js', 'src/js/slider.js'],
-//         entries: ['src/js/vendor/hammer.min.js', 'src/js/vendor/hammer.jquery.js', 'src/js/main.js', 'src/js/slider.js'],
-//         cache: {},
-//         packageCache: {}
-//     })
-//         .plugin(tsify)
-//         .transform('babelify', {
-//             presets: ['es2015'],
-//             extensions: ['.ts']
-//         })
-//         .bundle()
-//         .pipe(source('bundle.js'))
-//         .pipe(buffer())
-//         .pipe(sourcemaps.init({loadMaps: true}))
-//         .pipe(sourcemaps.write('./'))
-//         .pipe(gulp.dest('dist/js'));
-// });
-
-// Used for live typescript rendering...
-// var ts = require('gulp-typescript');
-// var tsProject = ts.createProject('tsconfig.json');
-// var watchify = require("watchify");
-// var gutil = require("gulp-util");
-
-// var watchedBrowserify = watchify(browserify({
-//     basedir: '.',
-//     debug: true,  //true: Causes tsify to emit source maps inside the bundled JavaScript file
-//     entries: ['src/js/main.ts'],
-//     cache: {},
-//     packageCache: {}
-// }).plugin(tsify));
-
-// function bundle() {
-//     return watchedBrowserify
-//         .bundle()
-//         .pipe(source('bundle.js'))
-//         .pipe(gulp.dest("dist/js"));
-// }
-
-//gulp.task("default", ["copy-html"], bundle);
-// watchedBrowserify.on("update", bundle);
-// watchedBrowserify.on("log", gutil.log);
