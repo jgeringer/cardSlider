@@ -1,0 +1,66 @@
+<html>
+    <head>
+        <title>Contentful</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scale=no" />
+        <link href="/styles/main.css" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css?family=Overpass:200,300,400,800" rel="stylesheet">
+
+        <script src="https://npmcdn.com/contentful@latest/dist/contentful.min.js"></script>
+        <script src="/js/vue.min.js"></script>
+        <script src="/js/vue-router.js"></script>
+    
+        
+    </head>
+    <body>
+
+        <h5>Contentful</h5>
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script>(window.jQuery)||document.write('<script src="/js/vendor/jquery.min.js"><\/script>');</script>
+
+        <div id="app">
+            <p>{{ message }}</p>
+            <p v-if="seen">Now you see me</p>
+            <ol>
+                <li v-for="todo in todos">
+                    {{ todo.text }}
+                </li>
+            </ol>
+
+            <ol>
+                <todo-item v-for="item in groceryList" v-bind:todo="item"></todo-item>
+            </ol>
+
+            <button v-on:click="reverseMessage">Reverse Message</button>
+            <input v-model="message">
+        </div>
+
+
+        <div id="productListing">
+            <ol>
+                <li v-for="product in products">
+                    {{ product }}
+                </li>
+            </ol>
+        </div>
+
+
+        <div id="routerApp">
+            <h1>Hello App!</h1>
+            <p>
+                <!-- use router-link component for navigation. -->
+                <!-- specify the link by passing the `to` prop. -->
+                <!-- <router-link> will be rendered as an `<a>` tag by default -->
+                <router-link to="/user/foo">Go to Foo</router-link>
+                <router-link to="/user/bar">Go to Bar</router-link>
+            </p>
+            <!-- route outlet -->
+            <!-- component matched by the route will render here -->
+            <router-view></router-view>
+        </div>
+
+
+        <script src="/js/contentful.js"></script>
+
+    </body>
+</html>

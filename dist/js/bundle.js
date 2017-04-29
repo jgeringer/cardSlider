@@ -84,10 +84,10 @@ function cardLoader() {
 
 
     //sample data
-    var dogs = [{ name: 'Snickers', age: 2 }, { name: 'Hardy', age: 6 }, { name: 'Chloe', age: 8 }];
+    var dogs = [{ name: 'Snickers', age: 2 }];
 
     var html = '\n        <div class="Card-detailContent">\n            ' + dogs.map(function (dog) {
-        return '\n            <p>\n                ' + dog.name + ' is ' + dog.age * 7 + ' dog years old. ' + dog.name + ' is ' + dog.age * 7 + ' dog years old. ' + dog.name + ' is ' + dog.age * 7 + ' dog years old.\n                ' + dog.name + ' is ' + dog.age * 7 + ' dog years old. ' + dog.name + ' is ' + dog.age * 7 + ' dog years old. ' + dog.name + ' is ' + dog.age * 7 + ' dog years old.\n                ' + dog.name + ' is ' + dog.age * 7 + ' dog years old. ' + dog.name + ' is ' + dog.age * 7 + ' dog years old. ' + dog.name + ' is ' + dog.age * 7 + ' dog years old.\n                ' + dog.name + ' is ' + dog.age * 7 + ' dog years old. ' + dog.name + ' is ' + dog.age * 7 + ' dog years old. ' + dog.name + ' is ' + dog.age * 7 + ' dog years old.\n                ' + dog.name + ' is ' + dog.age * 7 + ' dog years old. ' + dog.name + ' is ' + dog.age * 7 + ' dog years old. ' + dog.name + ' is ' + dog.age * 7 + ' dog years old.\n                ' + dog.name + ' is ' + dog.age * 7 + ' dog years old. ' + dog.name + ' is ' + dog.age * 7 + ' dog years old. ' + dog.name + ' is ' + dog.age * 7 + ' dog years old.\n                ' + dog.name + ' is ' + dog.age * 7 + ' dog years old. ' + dog.name + ' is ' + dog.age * 7 + ' dog years old. ' + dog.name + ' is ' + dog.age * 7 + ' dog years old.\n                ' + dog.name + ' is ' + dog.age * 7 + ' dog years old. ' + dog.name + ' is ' + dog.age * 7 + ' dog years old. ' + dog.name + ' is ' + dog.age * 7 + ' dog years old.\n                ' + dog.name + ' is ' + dog.age * 7 + ' dog years old. ' + dog.name + ' is ' + dog.age * 7 + ' dog years old. ' + dog.name + ' is ' + dog.age * 7 + ' dog years old.\n                ' + dog.name + ' is ' + dog.age * 7 + ' dog years old. ' + dog.name + ' is ' + dog.age * 7 + ' dog years old. ' + dog.name + ' is ' + dog.age * 7 + ' dog years old.\n                ' + dog.name + ' is ' + dog.age * 7 + ' dog years old. ' + dog.name + ' is ' + dog.age * 7 + ' dog years old. ' + dog.name + ' is ' + dog.age * 7 + ' dog years old.\n                ' + dog.name + ' is ' + dog.age * 7 + ' dog years old. ' + dog.name + ' is ' + dog.age * 7 + ' dog years old. ' + dog.name + ' is ' + dog.age * 7 + ' dog years old.\n                ' + dog.name + ' is ' + dog.age * 7 + ' dog years old. ' + dog.name + ' is ' + dog.age * 7 + ' dog years old. ' + dog.name + ' is ' + dog.age * 7 + ' dog years old.\n                ' + dog.name + ' is ' + dog.age * 7 + ' dog years old. ' + dog.name + ' is ' + dog.age * 7 + ' dog years old. ' + dog.name + ' is ' + dog.age * 7 + ' dog years old.\n            </p>\n            ';
+        return '\n            <p>\n                ' + dog.name + ' is ' + dog.age * 7 + ' dog years old. ' + dog.name + ' is ' + dog.age * 7 + ' dog years old. ' + dog.name + ' is ' + dog.age * 7 + ' dog years old.\n                ' + dog.name + ' is ' + dog.age * 7 + ' dog years old. ' + dog.name + ' is ' + dog.age * 7 + ' dog years old. ' + dog.name + ' is ' + dog.age * 7 + ' dog years old.\n                ' + dog.name + ' is ' + dog.age * 7 + ' dog years old. ' + dog.name + ' is ' + dog.age * 7 + ' dog years old. ' + dog.name + ' is ' + dog.age * 7 + ' dog years old.\n                ' + dog.name + ' is ' + dog.age * 7 + ' dog years old. ' + dog.name + ' is ' + dog.age * 7 + ' dog years old. ' + dog.name + ' is ' + dog.age * 7 + ' dog years old.\n                ' + dog.name + ' is ' + dog.age * 7 + ' dog years old. ' + dog.name + ' is ' + dog.age * 7 + ' dog years old. ' + dog.name + ' is ' + dog.age * 7 + ' dog years old.\n                ' + dog.name + ' is ' + dog.age * 7 + ' dog years old. ' + dog.name + ' is ' + dog.age * 7 + ' dog years old. ' + dog.name + ' is ' + dog.age * 7 + ' dog years old.\n                ' + dog.name + ' is ' + dog.age * 7 + ' dog years old. ' + dog.name + ' is ' + dog.age * 7 + ' dog years old. ' + dog.name + ' is ' + dog.age * 7 + ' dog years old.\n                ' + dog.name + ' is ' + dog.age * 7 + ' dog years old. ' + dog.name + ' is ' + dog.age * 7 + ' dog years old. ' + dog.name + ' is ' + dog.age * 7 + ' dog years old.\n                ' + dog.name + ' is ' + dog.age * 7 + ' dog years old. ' + dog.name + ' is ' + dog.age * 7 + ' dog years old. ' + dog.name + ' is ' + dog.age * 7 + ' dog years old.\n                ' + dog.name + ' is ' + dog.age * 7 + ' dog years old. ' + dog.name + ' is ' + dog.age * 7 + ' dog years old. ' + dog.name + ' is ' + dog.age * 7 + ' dog years old.\n                ' + dog.name + ' is ' + dog.age * 7 + ' dog years old. ' + dog.name + ' is ' + dog.age * 7 + ' dog years old. ' + dog.name + ' is ' + dog.age * 7 + ' dog years old.\n                ' + dog.name + ' is ' + dog.age * 7 + ' dog years old. ' + dog.name + ' is ' + dog.age * 7 + ' dog years old. ' + dog.name + ' is ' + dog.age * 7 + ' dog years old.\n                ' + dog.name + ' is ' + dog.age * 7 + ' dog years old. ' + dog.name + ' is ' + dog.age * 7 + ' dog years old. ' + dog.name + ' is ' + dog.age * 7 + ' dog years old.\n            </p>\n\n            <div class="CardCarousel">\n                <div style="background-image:url(/img/Frig/carousel-1-home.png)"></div>\n                <div style="background-image:url(/img/Frig/carousel-2-wff.png)"></div>\n            </div>\n\n            ';
     }).join('') + '\n        </ol>\n    ';
 
     $('.Card').off('click').on('click', function (e) {
@@ -137,6 +137,11 @@ function cardLoader() {
 
                 //ajax coming soon!
                 cardDetail.insertAdjacentHTML('beforeend', data);
+
+                //Load in the carousel at the top.
+
+
+                slider.init('.CardCarousel', '.CardCarousel > *');
             }, 100);
         }, 20);
 
@@ -246,7 +251,7 @@ function disable(el) {
 window.slider = {};
 
 // 2. Settings
-slider.sliderPanelSelector = '.Card';
+//slider.sliderPanelSelector = '.Card';
 slider.sliderPaginationSelector = '.slider-pagination';
 slider.sensitivity = 25; // horizontal % needed to trigger swipe
 
@@ -257,10 +262,12 @@ slider.activeSlide = 0;
 slider.slideCount = 0;
 
 // 4. Initialization + event listener
-slider.init = function (selector) {
+slider.init = function (selector, selectorChild) {
 
   // 4a. Find the container
   slider.sliderEl = document.querySelector(selector);
+
+  slider.sliderPanelSelector = selectorChild;
 
   // 4b. Count stuff
   slider.slideCount = slider.sliderEl.querySelectorAll(slider.sliderPanelSelector).length;
@@ -269,7 +276,7 @@ slider.init = function (selector) {
   var n = 0;
   for (n; n < slider.slideCount; n++) {
     var activeStatus = n == slider.activeSlide ? ' class="is-active"' : '';
-    slider.sliderEl.parentElement.querySelector(slider.sliderPaginationSelector).innerHTML += '<div ' + activeStatus + '></div>';
+    //slider.sliderEl.parentElement.querySelector( slider.sliderPaginationSelector ).innerHTML += '<div ' + activeStatus + '></div>';
   }
 
   // 4d. Set up HammerJS
@@ -325,7 +332,7 @@ slider.goTo = function (number) {
   }
 };
 
-slider.init('.CardListing');
+slider.init('.CardListing', '.CardListing > *');
 
 },{}],7:[function(require,module,exports){
 "use strict";

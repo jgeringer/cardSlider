@@ -37,8 +37,8 @@ export default function cardLoader(){
     //sample data
     let dogs = [
         { name: 'Snickers', age: 2 },
-        { name: 'Hardy', age: 6 },
-        { name: 'Chloe', age: 8 }
+        // { name: 'Hardy', age: 6 },
+        // { name: 'Chloe', age: 8 }
     ];
 
     let html = `
@@ -58,8 +58,13 @@ export default function cardLoader(){
                 ${dog.name} is ${dog.age * 7} dog years old. ${dog.name} is ${dog.age * 7} dog years old. ${dog.name} is ${dog.age * 7} dog years old.
                 ${dog.name} is ${dog.age * 7} dog years old. ${dog.name} is ${dog.age * 7} dog years old. ${dog.name} is ${dog.age * 7} dog years old.
                 ${dog.name} is ${dog.age * 7} dog years old. ${dog.name} is ${dog.age * 7} dog years old. ${dog.name} is ${dog.age * 7} dog years old.
-                ${dog.name} is ${dog.age * 7} dog years old. ${dog.name} is ${dog.age * 7} dog years old. ${dog.name} is ${dog.age * 7} dog years old.
             </p>
+
+            <div class="CardCarousel">
+                <div style="background-image:url(/img/Frig/carousel-1-home.png)"></div>
+                <div style="background-image:url(/img/Frig/carousel-2-wff.png)"></div>
+            </div>
+
             `).join('')}
         </ol>
     `;    
@@ -114,8 +119,20 @@ export default function cardLoader(){
                 //ajax coming soon!
                 cardDetail.insertAdjacentHTML('beforeend', data);                
                 
+
+                //Load in the carousel at the top.
+        
+        
+        
+        slider.init('.CardCarousel', '.CardCarousel > *');
+                
+
+
             }, 100);
         }, 20);
+
+
+        
 
 
         setTimeout(function(){

@@ -10,18 +10,25 @@ var browserSync = require('browser-sync').create();
 var imagemin = require('gulp-imagemin');
 var postcss = require('gulp-postcss');
 var cssnext = require('postcss-cssnext');
+var historyApiFallback = require('connect-history-api-fallback');
+var modRewrite = require('connect-modrewrite');
 
 var paths = {
-        pages:     ['src/*.html'],
-        images:    ['src/img/*'],
+        pages:     ['src/**/**.html'],
+        images:    ['src/img/*/*'],
         source:     './src',
         sourceCSS:  './src/styles/main.less',
         sourceLESS: './src/styles/**/*.less',
-        sourceJS:  ['src/js/vendor/hammer.min.js', 
-                    'src/js/vendor/hammer.jquery.js', 
-                    'src/js/main.js', 
+        sourceJS:  ['src/js/vendor/hammer.min.js',
+                    'src/js/vendor/hammer.jquery.js',
+                    'src/js/main.js',
                     'src/js/slider.js'
                    ],
+        sourceJSindividual:  [
+                    'src/js/contentful.js',
+                    'src/js/vue.min.js',
+                    'src/js/vue-router.js'
+        ],
         postCSSPlugins: [
             cssnext({ browsers: ['last 3 versions'] })
         ],
@@ -44,10 +51,16 @@ gulp.task('imagemin', function() {
 });
 
 //task: "gulp" copy html, and update css to destination
-gulp.task("default", ["copy-html", "css", "js"], function () {
+gulp.task("default", ["copy-html", "css", "js", "copy-js"], function () {
     
 });
 
+
+gulp.task("copy-js", function () {
+    return gulp.src(paths.sourceJSindividual)
+        .pipe(browserSync.reload({ stream: true }))
+        .pipe(gulp.dest('dist/js'));
+});
 
 //task: "gulp js"
 gulp.task("js", function(){
@@ -73,7 +86,12 @@ gulp.task("js", function(){
 gulp.task('browserSync', function() {
   browserSync.init({
     server: {
-      baseDir: './dist'
+      baseDir: './dist',
+      //index: './dist/contentful/',
+    //   middleware: [
+    //     historyApiFallback,
+    //     modRewrite(['!\\.\\w+ /index.html [L]'])
+    //   ]
     },
   })
 });
@@ -93,8 +111,8 @@ gulp.task('css', function () {
 gulp.task('watch', ['browserSync'], function(){
   gulp.watch(paths.pages, ['copy-html']);
   gulp.watch(paths.sourceLESS, ['css']);
-  //gulp.watch('src/js/*.ts', ['js']);
   gulp.watch('src/js/*.js', ['js']);
+  gulp.watch(paths.sourceJSindividual, ['copy-js']);
 });
 
 

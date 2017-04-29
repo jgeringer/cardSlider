@@ -2,7 +2,7 @@
 window.slider = {};
 
 // 2. Settings
-slider.sliderPanelSelector = '.Card';
+//slider.sliderPanelSelector = '.Card';
 slider.sliderPaginationSelector = '.slider-pagination';
 slider.sensitivity = 25 // horizontal % needed to trigger swipe
 
@@ -13,11 +13,13 @@ slider.activeSlide = 0;
 slider.slideCount = 0;
 
 // 4. Initialization + event listener
-slider.init = function( selector ) {
+slider.init = function( selector, selectorChild ) {
   
   // 4a. Find the container
   slider.sliderEl = document.querySelector( selector );
   
+  slider.sliderPanelSelector = selectorChild;
+
   // 4b. Count stuff
   slider.slideCount = slider.sliderEl.querySelectorAll( slider.sliderPanelSelector ).length;
   
@@ -25,7 +27,7 @@ slider.init = function( selector ) {
   var n = 0;
   for( n; n < slider.slideCount; n++ ) {
     var activeStatus = n == slider.activeSlide ? ' class="is-active"' : '';
-    slider.sliderEl.parentElement.querySelector( slider.sliderPaginationSelector ).innerHTML += '<div ' + activeStatus + '></div>';
+    //slider.sliderEl.parentElement.querySelector( slider.sliderPaginationSelector ).innerHTML += '<div ' + activeStatus + '></div>';
   }
   
   // 4d. Set up HammerJS
@@ -93,4 +95,4 @@ slider.goTo = function( number ) {
  }
 };
 
-slider.init('.CardListing');
+slider.init('.CardListing', '.CardListing > *');

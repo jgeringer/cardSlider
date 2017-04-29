@@ -42,3 +42,7 @@ Card Details:
 * ~~Fix sticky menu so it fires right away on mobile~~
 * Replace crappy setTimeouts with promises. 
 * Fix background attachement fixed on mobile: http://jsfiddle.net/QN9cH/1/
+
+Fixes:
+* Change .Card's to anchor elements instead of divs.
+* .Card's are off a few px when closing
